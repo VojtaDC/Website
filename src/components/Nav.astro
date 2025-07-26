@@ -1,17 +1,16 @@
 ---
-const baseUrl = import.meta.env.BASE_URL;
 const links = [
-  { href: `${baseUrl}`, text: 'Home' },
-  { href: `${baseUrl}timeline/`, text: 'Timeline' },
-  { href: `${baseUrl}projects/`, text: 'Projects' },
-  { href: `${baseUrl}cv/`, text: 'CV' },
-  { href: `${baseUrl}contact/`, text: 'Contact' },
+  { href: '/', text: 'Home' },
+  { href: '/timeline/', text: 'Timeline' },
+  { href: '/projects/', text: 'Projects' },
+  { href: '/cv/', text: 'CV' },
+  { href: '/contact/', text: 'Contact' },
 ];
 ---
 <nav class="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-sm bg-white/95">
   <div class="container mx-auto px-6 py-4">
     <div class="flex justify-between items-center">
-      <a href={baseUrl} class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
+      <a href="/" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
         Portfolio
       </a>
       <ul class="hidden md:flex space-x-8">
