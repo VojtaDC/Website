@@ -97,7 +97,12 @@ export const ui = {
     // Home page
     'home.title': 'Vítejte v Mém Portfoliu',
     'home.subtitle': 'Stavební Inženýr & Software Developer',
-    'home.description': 'Nadšený pro inženýrství, technologie a vytváření inovativních řešení.',
+    'home.description': 'Absolvent stavebního inženýrství a budoucí elektrotechnický inženýr, nadšený pro inovace, vzdělávání a vytváření pozitivního dopadu.',
+    'home.journey': 'Zobrazit Mou Cestu',
+    'home.projects': 'Zobrazit Projekty',
+    'home.about': 'O Mně',
+    'home.about.text1': 'Jsem čerstvý absolvent stavebního inženýrství na VUB a momentálně studuji magisterský program elektrotechniky na DTU v Dánsku. Moje cesta vede od práce v maloobchodě až po založení vlastního doučovacího podnikání, vždy poháněna zvědavostí a touhou učit se.',
+    'home.about.text2': 'Když nestuduji nebo nedoučuji, najdete mě na basketbalovém hřišti, kde trénuji mladé sportovce a kombinuji svou vášeň pro sport s rozvojem lídrských schopností.',
     
     // Timeline page
     'timeline.title': 'Má Cesta',
@@ -131,7 +136,12 @@ export const ui = {
     // Home page
     'home.title': 'Velkommen til Mit Portfolio',
     'home.subtitle': 'Civilingeniør & Software Udvikler',
-    'home.description': 'Passioneret omkring ingeniørarbejde, teknologi og skabelse af innovative løsninger.',
+    'home.description': 'Civilingeniør kandidat og kommende el-ingeniør, passioneret omkring innovation, uddannelse og skabelse af positiv indvirkning.',
+    'home.journey': 'Se Min Rejse',
+    'home.projects': 'Se Projekter',
+    'home.about': 'Om Mig',
+    'home.about.text1': 'Jeg er en nyuddannet civilingeniør fra VUB og studerer i øjeblikket min kandidatgrad i elektroteknik på DTU, Danmark. Min rejse spænder fra at arbejde i detailhandlen til at grundlægge min egen undervisningsvirksomhed, altid drevet af nysgerrighed og et ønske om at lære.',
+    'home.about.text2': 'Når jeg ikke studerer eller underviser, kan du finde mig på basketballbanen, hvor jeg træner unge atleter og kombinerer min passion for sport med lederudvikling.',
     
     // Timeline page
     'timeline.title': 'Min Rejse',
