@@ -6,4 +6,8 @@ export default defineConfig({
   site: 'https://vojtadc.github.io',
   base: '/Website',
   output: 'static',
+  build: {
+    format: 'directory'
+  },
+  trailingSlash: 'always'
 });
