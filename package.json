@@ -1,10 +1,15 @@
 {
-  "name": "mijn-site",
-  "version": "0.0.1",
+  "name": "vojta-portfolio",
+  "version": "1.0.0",
+  "description": "Multilingual portfolio website for Vojta Deconinck",
   "scripts": {
     "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "dev:host": "astro dev --host"
   },
   "dependencies": {
     "astro": "^3.0.0",

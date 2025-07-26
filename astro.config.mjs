@@ -8,5 +8,12 @@ export default defineConfig({
   build: {
     format: 'directory'
   },
-  trailingSlash: 'always'
+  trailingSlash: 'always',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'nl', 'cs', 'da'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  }
 });

@@ -1,19 +1,28 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import LanguageSelector from './LanguageSelector.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const langPrefix = lang === 'en' ? '' : `/${lang}`;
+
 const links = [
-  { href: '/', text: 'Home' },
-  { href: '/timeline/', text: 'Timeline' },
-  { href: '/projects/', text: 'Projects' },
-  { href: '/cv/', text: 'CV' },
-  { href: '/contact/', text: 'Contact' },
+  { href: `${langPrefix}/`, text: t('nav.home') },
+  { href: `${langPrefix}/timeline/`, text: t('nav.timeline') },
+  { href: `${langPrefix}/projects/`, text: t('nav.projects') },
+  { href: `${langPrefix}/cv/`, text: t('nav.cv') },
+  { href: `${langPrefix}/contact/`, text: t('nav.contact') },
 ];
 ---
 <nav class="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-sm bg-white/95">
   <div class="container mx-auto px-6 py-4">
     <div class="flex justify-between items-center">
-      <a href="/" class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
-        Portfolio
+      <a href={`${langPrefix}/`} class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
+        {t('nav.portfolio')}
       </a>
-      <ul class="hidden md:flex space-x-8">
+      <div class="flex items-center space-x-4">
+        <ul class="hidden md:flex space-x-8">
         {links.map(link => (
           <li>
             <a 
@@ -26,6 +35,8 @@ const links = [
           </li>
         ))}
       </ul>
+      <LanguageSelector />
+      </div>
       <!-- Mobile menu button -->
       <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

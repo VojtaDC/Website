@@ -1,0 +1,9 @@
+---
+// Nederlandse versie van de homepage
+---
+<script>
+  // Redirect to main pages with language detection
+  const currentPath = window.location.pathname;
+  const targetPath = currentPath.replace('/nl', '') || '/';
+  window.location.href = targetPath;
+</script>
