@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: "Professional Tutoring Business",
+    description: "Founded and operated a professional tutoring business providing high-quality educational services to students across various subjects.",
+    tech: ["Business Management", "Education", "Customer Service"],
+    status: "Active",
+    year: "2023-Present",
+    category: "Business"
+  },
+  {
+    title: "Civil Engineering Bachelor Thesis",
+    description: "Completed comprehensive bachelor thesis project in Civil Engineering, demonstrating advanced problem-solving and analytical skills.",
+    tech: ["Civil Engineering", "Research", "Analysis"],
+    status: "Completed",
+    year: "2025",
+    category: "Academic"
+  },
+  {
+    title: "Basketball Team Management",
+    description: "Coached and managed basketball team at Black Devils Vorst, developing leadership and team management skills.",
+    tech: ["Leadership", "Sports Management", "Team Building"],
+    status: "Completed",
+    year: "2024-2025",
+    category: "Sports"
+  },
+  {
+    title: "VUB-DTU Exchange Program",
+    description: "Successfully participated in Double Degree Exchange program between VUB and Technical University of Denmark.",
+    tech: ["International Collaboration", "Electrical Engineering", "Academic Excellence"],
+    status: "In Progress",
+    year: "2025-2027",
+    category: "Academic"
+  }
+];
+---
+
+<BaseLayout>
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Hero Section -->
+    <section class="py-20 px-6" data-aos="fade-up">
+      <div class="container mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+          My <span class="text-blue-600">Projects</span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+          A collection of my academic, professional, and personal projects that showcase my skills and experiences.
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="py-16 px-6">
+      <div class="container mx-auto">
+        <div class="grid md:grid-cols-2 gap-8">
+          {projects.map((project, index) => (
+            <div 
+              class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden hover:scale-105"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <div class="p-8">
+                <div class="flex items-center justify-between mb-4">
+                  <span class={`text-sm font-semibold px-3 py-1 rounded-full ${
+                    project.category === 'Business' ? 'bg-purple-100 text-purple-800' :
+                    project.category === 'Academic' ? 'bg-blue-100 text-blue-800' :
+                    'bg-orange-100 text-orange-800'
+                  }`}>
+                    {project.category}
+                  </span>
+                  <span class={`text-sm font-semibold px-3 py-1 rounded-full ${
+                    project.status === 'Active' ? 'bg-green-100 text-green-800' :
+                    project.status === 'Completed' ? 'bg-gray-100 text-gray-800' :
+                    'bg-yellow-100 text-yellow-800'
+                  }`}>
+                    {project.status}
+                  </span>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">{project.title}</h3>
+                <p class="text-blue-600 font-semibold mb-4">{project.year}</p>
+                <p class="text-gray-600 leading-relaxed mb-6">{project.description}</p>
+                
+                <div class="flex flex-wrap gap-2">
+                  {project.tech.map(tech => (
+                    <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-20 px-6 bg-white">
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-gray-800 text-center mb-12" data-aos="fade-up">
+          Skills & Technologies
+        </h2>
+        
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">⚡</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Engineering</h3>
+            <p class="text-gray-600 text-sm">Civil & Electrical Engineering principles and applications</p>
+          </div>
+          
+          <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">📚</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Education</h3>
+            <p class="text-gray-600 text-sm">Professional tutoring and educational program development</p>
+          </div>
+          
+          <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">💼</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Business</h3>
+            <p class="text-gray-600 text-sm">Entrepreneurship, business management, and customer relations</p>
+          </div>
+          
+          <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">🏀</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Leadership</h3>
+            <p class="text-gray-600 text-sm">Team management, coaching, and sports leadership</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Projects Section -->
+    <section class="py-20 px-6 bg-gray-50">
+      <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-6" data-aos="fade-up">What's Coming Next</h2>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+          Currently working on exciting new projects during my Master's program at DTU, Denmark. 
+          Stay tuned for updates on electrical engineering innovations and research projects.
+        </p>
+        <div class="space-x-4" data-aos="fade-up" data-aos-delay="400">
+          <a 
+            href="/timeline" 
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+          >
+            View My Journey
+          </a>
+          <a 
+            href="/contact" 
+            class="inline-block bg-white hover:bg-gray-50 text-gray-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-gray-200"
+          >
+            Collaborate With Me
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

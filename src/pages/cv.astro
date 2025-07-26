@@ -1,0 +1,182 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout>
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Hero Section -->
+    <section class="py-20 px-6" data-aos="fade-up">
+      <div class="container mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+          My <span class="text-blue-600">CV</span>
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+          Download my comprehensive CV to learn more about my education, experience, and skills.
+        </p>
+        <a 
+          href="/cv.pdf" 
+          target="_blank"
+          class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+        >
+          <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          Download CV (PDF)
+        </a>
+      </div>
+    </section>
+
+    <!-- CV Preview -->
+    <section class="py-16 px-6">
+      <div class="container mx-auto max-w-4xl">
+        <div class="bg-white rounded-xl shadow-lg p-8 md:p-12">
+          <!-- Header -->
+          <div class="text-center mb-12" data-aos="fade-up">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">CV Preview</h2>
+            <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+          </div>
+
+          <!-- Personal Info -->
+          <div class="mb-12" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Personal Information</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <p class="text-gray-600 mb-2"><strong>Name:</strong> [Your Name]</p>
+                <p class="text-gray-600 mb-2"><strong>Email:</strong> your.email@example.com</p>
+                <p class="text-gray-600 mb-2"><strong>Location:</strong> Copenhagen, Denmark / Brussels, Belgium</p>
+              </div>
+              <div>
+                <p class="text-gray-600 mb-2"><strong>Phone:</strong> +32 XXX XXX XXX</p>
+                <p class="text-gray-600 mb-2"><strong>LinkedIn:</strong> linkedin.com/in/yourprofile</p>
+                <p class="text-gray-600 mb-2"><strong>GitHub:</strong> github.com/yourusername</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="mb-12" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Education</h3>
+            <div class="space-y-6">
+              <div class="border-l-4 border-blue-500 pl-6">
+                <h4 class="text-xl font-semibold text-gray-800">Master in Electrical Engineering</h4>
+                <p class="text-blue-600 font-medium">Technical University of Denmark (DTU)</p>
+                <p class="text-gray-600">September 2025 - Expected 2027</p>
+                <p class="text-gray-600 mt-2">Double Degree Exchange Program with VUB</p>
+              </div>
+              <div class="border-l-4 border-green-500 pl-6">
+                <h4 class="text-xl font-semibold text-gray-800">Bachelor in Civil Engineering</h4>
+                <p class="text-green-600 font-medium">Vrije Universiteit Brussel (VUB)</p>
+                <p class="text-gray-600">September 2022 - July 2025</p>
+                <p class="text-gray-600 mt-2">Graduated with honors</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience -->
+          <div class="mb-12" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Professional Experience</h3>
+            <div class="space-y-6">
+              <div class="border-l-4 border-purple-500 pl-6">
+                <h4 class="text-xl font-semibold text-gray-800">Founder & Professional Tutor</h4>
+                <p class="text-purple-600 font-medium">Own Tutoring Business</p>
+                <p class="text-gray-600">End 2023 - Present</p>
+                <ul class="text-gray-600 mt-2 list-disc list-inside">
+                  <li>Founded and operated professional tutoring business</li>
+                  <li>Provided high-quality educational services to students</li>
+                  <li>Managed business operations and customer relations</li>
+                </ul>
+              </div>
+              <div class="border-l-4 border-orange-500 pl-6">
+                <h4 class="text-xl font-semibold text-gray-800">Basketball Coach</h4>
+                <p class="text-orange-600 font-medium">Black Devils Vorst</p>
+                <p class="text-gray-600">2024 - 2025</p>
+                <ul class="text-gray-600 mt-2 list-disc list-inside">
+                  <li>Coached and mentored young basketball players</li>
+                  <li>Developed training programs and strategies</li>
+                  <li>Enhanced leadership and communication skills</li>
+                </ul>
+              </div>
+              <div class="border-l-4 border-blue-500 pl-6">
+                <h4 class="text-xl font-semibold text-gray-800">Private Tutor</h4>
+                <p class="text-blue-600 font-medium">Freelance</p>
+                <p class="text-gray-600">2021 - 2023</p>
+                <ul class="text-gray-600 mt-2 list-disc list-inside">
+                  <li>Provided one-on-one tutoring in mathematics and sciences</li>
+                  <li>Helped students improve academic performance</li>
+                  <li>Developed personalized learning strategies</li>
+                </ul>
+              </div>
+              <div class="border-l-4 border-green-500 pl-6">
+                <h4 class="text-xl font-semibold text-gray-800">Student Worker</h4>
+                <p class="text-green-600 font-medium">Okay Supermarket</p>
+                <p class="text-gray-600">2020 - 2022</p>
+                <ul class="text-gray-600 mt-2 list-disc list-inside">
+                  <li>Customer service and retail operations</li>
+                  <li>Inventory management and cash handling</li>
+                  <li>Team collaboration in fast-paced environment</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="mb-12" data-aos="fade-up" data-aos-delay="400">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Skills & Competencies</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-3">Technical Skills</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Civil Engineering</span>
+                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Electrical Engineering</span>
+                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Project Management</span>
+                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Problem Solving</span>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-3">Soft Skills</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Leadership</span>
+                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Communication</span>
+                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Team Work</span>
+                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Teaching</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="mb-12" data-aos="fade-up" data-aos-delay="500">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Languages</h3>
+            <div class="grid md:grid-cols-3 gap-4">
+              <div class="text-center p-4 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold text-gray-800">Dutch</h4>
+                <p class="text-gray-600">Native</p>
+              </div>
+              <div class="text-center p-4 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold text-gray-800">English</h4>
+                <p class="text-gray-600">Fluent</p>
+              </div>
+              <div class="text-center p-4 bg-gray-50 rounded-lg">
+                <h4 class="font-semibold text-gray-800">French</h4>
+                <p class="text-gray-600">Intermediate</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Download Button -->
+          <div class="text-center" data-aos="fade-up" data-aos-delay="600">
+            <a 
+              href="/cv.pdf" 
+              target="_blank"
+              class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              Download Full CV
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
