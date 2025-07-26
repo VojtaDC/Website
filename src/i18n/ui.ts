@@ -19,7 +19,12 @@ export const ui = {
     // Home page
     'home.title': 'Welcome to My Portfolio',
     'home.subtitle': 'Civil Engineer & Software Developer',
-    'home.description': 'Passionate about engineering, technology, and creating innovative solutions.',
+    'home.description': 'Civil Engineering graduate and aspiring Electrical Engineer, passionate about innovation, education, and making a positive impact.',
+    'home.journey': 'View My Journey',
+    'home.projects': 'See Projects',
+    'home.about': 'About Me',
+    'home.about.text1': 'I\'m a recent Civil Engineering graduate from VUB, currently pursuing my Master\'s in Electrical Engineering at DTU, Denmark. My journey spans from working in retail to founding my own tutoring business, always driven by curiosity and a desire to learn.',
+    'home.about.text2': 'When I\'m not studying or tutoring, you can find me on the basketball court coaching young athletes, combining my passion for sports with leadership development.',
     
     // Timeline page
     'timeline.title': 'My Journey',
@@ -53,7 +58,12 @@ export const ui = {
     // Home page
     'home.title': 'Welkom bij Mijn Portfolio',
     'home.subtitle': 'Civiel Ingenieur & Software Ontwikkelaar',
-    'home.description': 'Gepassioneerd door engineering, technologie en het creëren van innovatieve oplossingen.',
+    'home.description': 'Afgestudeerd Civiel Ingenieur en aspirant Elektrotechnisch Ingenieur, gepassioneerd door innovatie, onderwijs en positieve impact maken.',
+    'home.journey': 'Bekijk Mijn Reis',
+    'home.projects': 'Bekijk Projecten',
+    'home.about': 'Over Mij',
+    'home.about.text1': 'Ik ben een recent afgestudeerde Civiel Ingenieur van de VUB en studeer momenteel mijn Master Elektrotechniek aan DTU, Denemarken. Mijn reis loopt van werken in de retail tot het opzetten van mijn eigen bijlesbedrijf, altijd gedreven door nieuwsgierigheid en een verlangen om te leren.',
+    'home.about.text2': 'Wanneer ik niet studeer of bijles geef, kun je me vinden op het basketbalveld waar ik jonge atleten coach, waarbij ik mijn passie voor sport combineer met leiderschapsontwikkeling.',
     
     // Timeline page
     'timeline.title': 'Mijn Reis',
