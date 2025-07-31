@@ -32,15 +32,21 @@ const currentLang = getLangFromUrl(Astro.url);
       pathWithoutLang = '/' + pathWithoutLang;
     }
     
-    // Remove trailing slash except for root
+    // Remove trailing slash except for root, but keep it for directories
     if (pathWithoutLang !== '/' && pathWithoutLang.endsWith('/')) {
       pathWithoutLang = pathWithoutLang.slice(0, -1);
     }
     
     // Add new language prefix (except for default language 'en')
-    const newPath = newLang === 'en' ? pathWithoutLang : `/${newLang}${pathWithoutLang}`;
+    let newPath;
+    if (newLang === 'en') {
+      newPath = pathWithoutLang === '/' ? '/' : pathWithoutLang + '/';
+    } else {
+      newPath = pathWithoutLang === '/' ? `/${newLang}/` : `/${newLang}${pathWithoutLang}/`;
+    }
     
     // Navigate to new path
+    console.log('Navigating from', currentPath, 'to', newPath);
     window.location.href = newPath;
   });
 </script>
