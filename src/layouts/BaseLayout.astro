@@ -16,7 +16,7 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
-  <body class="min-h-screen font-['Inter',sans-serif] antialiased theme-transition" data-theme="dark">
+  <body class="min-h-screen font-['Inter',sans-serif] antialiased theme-transition">
     <Nav />
     <main>
       <slot />
@@ -68,6 +68,23 @@ const lang = getLangFromUrl(Astro.url);
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.js"></script>
     <script>
+      // Theme initialization - must run before DOM content loads
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        document.documentElement.setAttribute('data-theme', theme);
+        
+        // Apply initial theme classes to body
+        if (theme === 'light') {
+          document.body.className = 'min-h-screen font-Inter antialiased theme-transition bg-gray-50 text-gray-800';
+        } else {
+          document.body.className = 'min-h-screen font-Inter antialiased theme-transition bg-black text-white';
+        }
+        document.body.setAttribute('data-theme', theme);
+      })();
+      
       document.addEventListener('DOMContentLoaded', () => {
         AOS.init({
           duration: 800,

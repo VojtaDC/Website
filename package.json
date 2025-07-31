@@ -14,9 +14,7 @@
   "dependencies": {
     "aos": "^2.3.4",
     "astro": "^3.0.0",
-    "flowbite": "^1.6.5",
-    "tsparticles": "^3.8.1",
-    "tsparticles-preset-stars": "^2.12.0"
+    "flowbite": "^1.6.5"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^3.0.0",

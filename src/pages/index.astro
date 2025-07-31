@@ -188,164 +188,212 @@ const t = useTranslations(lang);
     z-index: 1;
   }
   
+  #particles-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+  }
+  
   /* Ensure content is above particles but allows mouse events through */
   .relative.z-10 {
     pointer-events: auto;
     z-index: 10;
   }
+  
+  .relative.z-10 * {
+    pointer-events: auto;
+  }
 </style>
 
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
 <script>
-  // Initialize tsParticles - similar to Vojtech Nerad's website
-  document.addEventListener('DOMContentLoaded', async () => {
+  // Enhanced particle animation with mouse interaction
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('particles-container');
+    if (!container) return;
     
-    // Function to get current theme
+    // Create canvas for particles
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    container.appendChild(canvas);
+    
+    let mouse = { x: null, y: null };
+    
+    // Set canvas size
+    function resizeCanvas() {
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Mouse tracking with movement detection
+    let lastMouse = { x: null, y: null };
+    let mouseVelocity = { x: 0, y: 0 };
+    
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const newMouse = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+      
+      if (mouse.x !== null && mouse.y !== null) {
+        mouseVelocity.x = newMouse.x - mouse.x;
+        mouseVelocity.y = newMouse.y - mouse.y;
+      }
+      
+      mouse.x = newMouse.x;
+      mouse.y = newMouse.y;
+    });
+    
+    canvas.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+      mouseVelocity.x = 0;
+      mouseVelocity.y = 0;
+    });
+    
+    // Particle class
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 3 + 1;
+        this.originalSize = this.size;
+      }
+      
+      update() {
+        // Mouse attraction and velocity influence
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 200) {
+            const force = (200 - distance) / 200;
+            
+            // Attraction towards mouse
+            this.vx += (dx / distance) * force * 0.02;
+            this.vy += (dy / distance) * force * 0.02;
+            
+            // Add mouse velocity influence for trailing effect
+            this.vx += mouseVelocity.x * force * 0.01;
+            this.vy += mouseVelocity.y * force * 0.01;
+            
+            // Scale particle based on proximity
+            this.size = this.originalSize + force * 3;
+          } else {
+            this.size = this.originalSize;
+          }
+        } else {
+          this.size = this.originalSize;
+        }
+        
+        this.x += this.vx;
+        this.y += this.vy;
+        
+        // Boundary bounce
+        if (this.x < 0 || this.x > canvas.width) {
+          this.x = Math.max(0, Math.min(canvas.width, this.x));
+          this.vx *= -0.8;
+        }
+        if (this.y < 0 || this.y > canvas.height) {
+          this.y = Math.max(0, Math.min(canvas.height, this.y));
+          this.vy *= -0.8;
+        }
+        
+        // Friction
+        this.vx *= 0.995;
+        this.vy *= 0.995;
+      }
+      
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = getCurrentTheme() === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(59, 130, 246, 0.7)';
+        ctx.fill();
+      }
+    }
+    
+    // Create particles
+    const particles = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push(new Particle());
+    }
+    
+    // Get current theme
     function getCurrentTheme() {
       return document.documentElement.getAttribute('data-theme') || 'light';
     }
     
-    // Function to get particle colors based on theme
-    function getParticleColors() {
-      const theme = getCurrentTheme();
-      if (theme === 'dark') {
-        return {
-          particles: "#ffffff",
-          lines: "#ffffff"
-        };
-      } else {
-        return {
-          particles: "#3b82f6", // blue-600
-          lines: "#60a5fa"      // blue-400
-        };
-      }
-    }
-    
-    // Function to update particles
-    function updateParticles() {
-      const colors = getParticleColors();
-      const container = tsParticles.domItem(0);
-      if (container) {
-        container.options.particles.color.value = colors.particles;
-        container.options.particles.lineLinked.color = colors.lines;
-        container.refresh();
-      }
-    }
-    
-    const colors = getParticleColors();
-    
-    await tsParticles.load("particles-container", {
-      fullScreen: {
-        enable: false
-      },
-      background: {
-        color: {
-          value: "transparent"
-        }
-      },
-      fpsLimit: 120,
-      particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            area: 800
-          }
-        },
-        color: {
-          value: colors.particles
-        },
-        shape: {
-          type: "circle"
-        },
-        opacity: {
-          value: 0.7,
-          random: false,
-          animation: {
-            enable: false
-          }
-        },
-        size: {
-          value: 4,
-          random: true,
-          animation: {
-            enable: false
-          }
-        },
-        lineLinked: {
-          enable: true,
-          distance: 150,
-          color: colors.lines,
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 0.5,
-          direction: "none",
-          random: false,
-          straight: false,
-          outModes: {
-            default: "bounce"
-          },
-          attract: {
-            enable: false,
-            rotateX: 600,
-            rotateY: 1200
-          }
-        }
-      },
-      interactivity: {
-        detectsOn: "canvas",
-        events: {
-          onHover: {
-            enable: true,
-            mode: "attract"
-          },
-          onClick: {
-            enable: true,
-            mode: "push"
-          },
-          resize: true
-        },
-        modes: {
-          attract: {
-            distance: 300,
-            duration: 1,
-            factor: 2
-          },
-          grab: {
-            distance: 400,
-            lineLinked: {
-              opacity: 1
-            }
-          },
-          bubble: {
-            distance: 400,
-            size: 40,
-            duration: 2,
-            opacity: 8,
-            speed: 4
-          },
-          push: {
-            quantity: 3,
-            particles_nb: 3
-          },
-          remove: {
-            quantity: 2
-          }
-        }
-      },
-      detectRetina: true
-    });
-    
-    // Listen for theme changes and update particles
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
-          updateParticles();
-        }
+    // Animation loop
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
       });
+      
+      // Draw connections between particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            const opacity = 0.4 * (1 - distance / 150);
+            ctx.strokeStyle = getCurrentTheme() === 'dark' ? 
+              `rgba(255, 255, 255, ${opacity})` : 
+              `rgba(96, 165, 250, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+      
+      // Draw lines from mouse to nearby particles
+      if (mouse.x !== null && mouse.y !== null) {
+        particles.forEach(particle => {
+          const dx = mouse.x - particle.x;
+          const dy = mouse.y - particle.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 200) {
+            ctx.beginPath();
+            ctx.moveTo(mouse.x, mouse.y);
+            ctx.lineTo(particle.x, particle.y);
+            const opacity = 0.6 * (1 - distance / 200);
+            ctx.strokeStyle = getCurrentTheme() === 'dark' ? 
+              `rgba(255, 255, 255, ${opacity})` : 
+              `rgba(96, 165, 250, ${opacity})`;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+          }
+        });
+      }
+      
+      // Reduce mouse velocity gradually
+      mouseVelocity.x *= 0.95;
+      mouseVelocity.y *= 0.95;
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Listen for theme changes
+    const observer = new MutationObserver(() => {
+      // Theme change detected, particles will update on next frame
     });
     
     observer.observe(document.documentElement, {
@@ -353,4 +401,3 @@ const t = useTranslations(lang);
       attributeFilter: ['data-theme']
     });
   });
-</script>
