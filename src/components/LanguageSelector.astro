@@ -24,12 +24,23 @@ const currentLang = getLangFromUrl(Astro.url);
     const newLang = select.value;
     const currentPath = window.location.pathname;
     
-    // Remove current language from path if present
-    const pathWithoutLang = currentPath.replace(/^\/(en|nl|cs|da)/, '') || '/';
+    // Remove current language from path if present and normalize
+    let pathWithoutLang = currentPath.replace(/^\/(en|nl|cs|da)/, '') || '/';
+    
+    // Ensure path starts with /
+    if (!pathWithoutLang.startsWith('/')) {
+      pathWithoutLang = '/' + pathWithoutLang;
+    }
+    
+    // Remove trailing slash except for root
+    if (pathWithoutLang !== '/' && pathWithoutLang.endsWith('/')) {
+      pathWithoutLang = pathWithoutLang.slice(0, -1);
+    }
     
     // Add new language prefix (except for default language 'en')
     const newPath = newLang === 'en' ? pathWithoutLang : `/${newLang}${pathWithoutLang}`;
     
+    // Navigate to new path
     window.location.href = newPath;
   });
 </script>

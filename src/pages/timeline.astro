@@ -1,57 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Timeline from '../components/Timeline.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
 
-const timelineEvents = [
-  {
-    year: "2020-2022",
-    title: "Student Worker - Okay Supermarket",
-    description: "Worked as a student employee while pursuing my studies, gaining valuable experience in customer service and retail operations.",
-    type: "work",
-    icon: "🏪"
-  },
-  {
-    year: "2021",
-    title: "Private Tutoring - Started",
-    description: "Began offering private tutoring services to fellow students, discovering my passion for teaching and education.",
-    type: "education",
-    icon: "📚"
-  },
-  {
-    year: "Sept 2022",
-    title: "Bachelor Civil Engineering - VUB",
-    description: "Started my Bachelor's degree in Civil Engineering at Vrije Universiteit Brussel (VUB), focusing on technical problem-solving and engineering principles.",
-    type: "education",
-    icon: "🎓"
-  },
-  {
-    year: "End 2023",
-    title: "Founded Tutoring Business",
-    description: "Established my own professional tutoring business as a student entrepreneur, providing high-quality educational services.",
-    type: "business",
-    icon: "💼"
-  },
-  {
-    year: "2024-2025",
-    title: "Basketball Coach - Black Devils Vorst",
-    description: "Coached basketball at Black Devils Vorst, developing leadership skills and working with young athletes.",
-    type: "sports",
-    icon: "🏀"
-  },
-  {
-    year: "July 2025",
-    title: "Bachelor Degree Completed",
-    description: "Successfully completed my Bachelor's degree in Civil Engineering at VUB with excellent results.",
-    type: "education",
-    icon: "🎉"
-  },
-  {
-    year: "Sept 2025",
-    title: "Master Electrical Engineering - DTU",
-    description: "Starting Master's in Electrical Engineering at Technical University of Denmark (DTU) through Double Degree Exchange program with VUB.",
-    type: "education",
-    icon: "⚡"
-  }
-];
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <BaseLayout>
@@ -59,111 +12,58 @@ const timelineEvents = [
     <!-- Hero Section -->
     <section class="py-20 px-6">
       <div class="container mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-          My <span class="text-blue-600">Journey</span>
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6" data-aos="fade-up">
+          {t('timeline.title')}
         </h1>
-        <p class="text-xl text-gray-800 max-w-3xl mx-auto leading-relaxed">
-          From student worker to engineering graduate, here's the timeline of my professional and academic journey.
+        <p class="text-xl text-gray-800 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+          {t('timeline.subtitle')}
         </p>
-        <div class="mt-8">
-          <button 
-            onclick="document.getElementById('timeline-section').scrollIntoView({behavior: 'smooth'})"
-            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-          >
-            Explore Timeline
-          </button>
-        </div>
       </div>
     </section>
 
     <!-- Timeline Section -->
     <section id="timeline-section" class="py-16 px-6">
       <div class="container mx-auto">
-        <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">My Timeline</h2>
-        <div class="relative max-w-4xl mx-auto">
-          <!-- Timeline line -->
-          <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-blue-400 h-full"></div>
-          
-          <!-- Timeline events -->
-          <div class="space-y-12">
-            {timelineEvents.map((event, index) => {
-              const isEven = index % 2 === 0;
-              const borderColor = event.type === 'work' ? 'border-green-500' :
-                                event.type === 'education' ? 'border-blue-500' :
-                                event.type === 'business' ? 'border-purple-500' : 'border-orange-500';
-              const badgeColor = event.type === 'work' ? 'bg-green-100 text-green-800' :
-                               event.type === 'education' ? 'bg-blue-100 text-blue-800' :
-                               event.type === 'business' ? 'bg-purple-100 text-purple-800' : 'bg-orange-100 text-orange-800';
-              return (
-                <div class={`relative flex items-center ${isEven ? 'justify-start' : 'justify-end'}`}>
-                  <!-- Timeline dot -->
-                  <div class="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-blue-600 rounded-full border-4 border-white shadow-lg z-10"></div>
-                  
-                  <!-- Event card -->
-                  <div class={`w-5/12 ${isEven ? 'pr-8' : 'pl-8'}`}>
-                    <div class={`bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 hover:scale-105 border-l-4 ${borderColor}`}>
-                      <div class="flex items-center mb-3">
-                        <span class="text-2xl mr-3">{event.icon}</span>
-                        <span class={`text-sm font-semibold px-3 py-1 rounded-full ${badgeColor}`}>
-                          {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
-                        </span>
-                      </div>
-                      <h3 class="text-xl font-bold text-gray-900 mb-2">{event.title}</h3>
-                      <p class="text-blue-700 font-semibold mb-3">{event.year}</p>
-                      <p class="text-gray-800 leading-relaxed">{event.description}</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <Timeline />
       </div>
     </section>
 
     <!-- Call to Action -->
     <section class="py-20 px-6">
       <div class="container mx-auto text-center">
-        <h2 class="text-4xl font-bold text-gray-900 mb-6">What's Next?</h2>
-        <p class="text-xl text-gray-800 mb-8 max-w-2xl mx-auto">
-          Currently pursuing my Master's in Electrical Engineering at DTU, Denmark. 
-          Always open to new opportunities and collaborations.
-        </p>
-        <div class="space-x-4">
-          <a 
-            href="/projects" 
-            class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-          >
-            View Projects
-          </a>
-          <a 
-            href="/contact" 
-            class="inline-block bg-white hover:bg-gray-50 text-gray-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-gray-200"
-          >
-            Get in Touch
-          </a>
+        <div data-aos="fade-up">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">{t('timeline.cta.title')}</h2>
+          <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            {t('timeline.cta.description')}
+          </p>
+          <div class="space-x-4 space-y-4 md:space-y-0">
+            <a 
+              href={getLocalizedPath('contact', lang)}
+              class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              {t('nav.contact')}
+            </a>
+            <a 
+              href={getLocalizedPath('projects', lang)}
+              class="inline-block bg-white hover:bg-gray-50 text-gray-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-gray-200"
+            >
+              {t('nav.projects')}
+            </a>
+          </div>
         </div>
       </div>
     </section>
   </div>
-</BaseLayout>
 
-<style>
-  /* Custom scrollbar for webkit browsers */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background: #3b82f6;
-    border-radius: 4px;
-  }
-  
-  ::-webkit-scrollbar-thumb:hover {
-    background: #2563eb;
-  }
-</style>
+  <!-- Scripts for animations -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+      });
+    });
+  </script>
+</BaseLayout>

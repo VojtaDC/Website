@@ -1,9 +1,11 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath, getStaticPaths } from '../../i18n/utils';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+export { getStaticPaths };
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as any);
 ---
 <BaseLayout>
   <!-- Hero Section -->
@@ -19,13 +21,13 @@ const t = useTranslations(lang);
         </p>
         <div class="space-x-4 space-y-4 md:space-y-0">
           <a 
-            href={getLocalizedPath('timeline', lang)}
+            href={getLocalizedPath('timeline', lang as any)}
             class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
             {t('home.journey')}
           </a>
           <a 
-            href={getLocalizedPath('projects', lang)}
+            href={getLocalizedPath('projects', lang as any)}
             class="inline-block bg-white hover:bg-gray-50 text-gray-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-gray-200"
           >
             {t('home.projects')}
@@ -57,7 +59,7 @@ const t = useTranslations(lang);
             {t('home.about.text2')}
           </p>
           <a 
-            href={getLocalizedPath('cv', lang)}
+            href={getLocalizedPath('cv', lang as any)}
             class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
           >
             {t('cv.title')}
@@ -101,7 +103,7 @@ const t = useTranslations(lang);
           <div class="text-4xl mb-4">📈</div>
           <h3 class="text-xl font-bold text-gray-800 mb-4">{t('home.cards.timeline.title')}</h3>
           <p class="text-gray-600 mb-6">{t('home.cards.timeline.description')}</p>
-          <a href={getLocalizedPath('timeline', lang)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
+          <a href={getLocalizedPath('timeline', lang as any)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
             {t('home.cards.timeline.link')}
           </a>
         </div>
@@ -109,7 +111,7 @@ const t = useTranslations(lang);
           <div class="text-4xl mb-4">🚀</div>
           <h3 class="text-xl font-bold text-gray-800 mb-4">{t('home.cards.projects.title')}</h3>
           <p class="text-gray-600 mb-6">{t('home.cards.projects.description')}</p>
-          <a href={getLocalizedPath('projects', lang)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
+          <a href={getLocalizedPath('projects', lang as any)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
             {t('home.cards.projects.link')}
           </a>
         </div>
@@ -117,7 +119,7 @@ const t = useTranslations(lang);
           <div class="text-4xl mb-4">💬</div>
           <h3 class="text-xl font-bold text-gray-800 mb-4">{t('home.cards.contact.title')}</h3>
           <p class="text-gray-600 mb-6">{t('home.cards.contact.description')}</p>
-          <a href={getLocalizedPath('contact', lang)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
+          <a href={getLocalizedPath('contact', lang as any)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
             {t('home.cards.contact.link')}
           </a>
         </div>

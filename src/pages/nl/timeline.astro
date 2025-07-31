@@ -11,16 +11,58 @@ const t = useTranslations(lang);
     <!-- Hero Section -->
     <section class="py-20 px-6">
       <div class="container mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6" data-aos="fade-up">
           {t('timeline.title')}
         </h1>
-        <p class="text-xl text-gray-800 max-w-3xl mx-auto leading-relaxed">
+        <p class="text-xl text-gray-800 max-w-3xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
           {t('timeline.subtitle')}
         </p>
       </div>
     </section>
 
-    <!-- Timeline Component -->
-    <Timeline />
+    <!-- Timeline Section -->
+    <section id="timeline-section" class="py-16 px-6">
+      <div class="container mx-auto">
+        <Timeline />
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 px-6">
+      <div class="container mx-auto text-center">
+        <div data-aos="fade-up">
+          <h2 class="text-3xl font-bold text-gray-800 mb-6">Klaar om Samen te Werken?</h2>
+          <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Of je nu bijles nodig hebt, engineering projecten wilt bespreken, of samenwerkingsmogelijkheden wilt verkennen, ik ben er om te helpen.
+          </p>
+          <div class="space-x-4 space-y-4 md:space-y-0">
+            <a 
+              href="/nl/contact/"
+              class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            >
+              {t('nav.contact')}
+            </a>
+            <a 
+              href="/nl/projects/"
+              class="inline-block bg-white hover:bg-gray-50 text-gray-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-gray-200"
+            >
+              {t('nav.projects')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
+
+  <!-- Scripts for animations -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+      });
+    });
+  </script>
 </BaseLayout>

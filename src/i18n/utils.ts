@@ -17,3 +17,29 @@ export function getStaticPaths() {
     params: { lang },
   }));
 }
+
+// Get the path for a specific language
+export function getLocalizedPath(path: string, lang: keyof typeof ui) {
+  // Remove leading slash if present
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  
+  // For default language (en), don't add prefix
+  if (lang === defaultLang) {
+    return `/${cleanPath}`;
+  }
+  
+  // For other languages, add language prefix
+  return `/${lang}/${cleanPath}`;
+}
+
+// Get current path without language prefix
+export function getPathWithoutLang(url: URL) {
+  const pathSegments = url.pathname.split('/').filter(Boolean);
+  
+  // If first segment is a language, remove it
+  if (pathSegments.length > 0 && pathSegments[0] in ui) {
+    pathSegments.shift();
+  }
+  
+  return '/' + pathSegments.join('/');
+}
