@@ -14,7 +14,8 @@ export const ui = {
     'nav.projects': 'Projects',
     'nav.cv': 'CV',
     'nav.contact': 'Contact',
-    'nav.portfolio': 'Portfolio',
+    'nav.portfolio': 'Vojtěch De Coninck',
+    'nav.welcome': 'Welcome!',
     
     // Home page
     'home.title': 'Welcome to My Portfolio',
@@ -43,6 +44,10 @@ export const ui = {
     'home.stats.sports.desc': 'Basketball coach at Black Devils Vorst',
     'home.stats.teaching': 'Teaching',
     'home.stats.teaching.desc': 'Private tutoring since 2021',
+    'home.contact.email': 'vojtechdeconinck@gmail.com',
+    'home.contact.github': 'vojtechdc',
+    'home.contact.location': 'Brussels, Belgium',
+    'home.skills.title': 'My Experience',
     
     // Timeline page
     'timeline.title': 'My Journey',
@@ -61,9 +66,15 @@ export const ui = {
     
     // Projects page
     'projects.title': 'My Projects',
-    'projects.subtitle': 'A showcase of my work and achievements',
-    
-    // CV page
+    'projects.subtitle': 'Discover my passion for teaching, education, sports coaching and excellence in engineering work.',
+    'projects.tutoring.title': 'Private Tutoring Business',
+    'projects.tutoring.description': 'Professional tutoring services helping students excel across multiple subjects including mathematics, physics, chemistry and languages. Specialized in personalized learning methods and exam preparation.',
+    'projects.thesis.title': 'Civil Engineering Bachelor Thesis',
+    'projects.thesis.description': 'Advanced research project focused on structural analysis and innovative engineering solutions. Combining theoretical knowledge with practical applications in modern construction techniques.',
+    'projects.basketball.title': 'Basketball Coaching & Leadership',
+    'projects.basketball.description': 'Leading and coaching youth basketball teams, developing both athletic skills and personal character. Focus on teamwork, discipline and strategic thinking on and off the court.',
+    'projects.exchange.title': 'International Engineering Exchange',
+    'projects.exchange.description': 'Double Degree program at Technical University of Denmark, specializing in advanced electrical engineering and sustainable technology solutions for a global perspective.',
     'cv.title': 'Curriculum Vitae',
     'cv.subtitle': 'Professional Experience and Education',
     
@@ -82,6 +93,22 @@ export const ui = {
     'timeline.events.education3.description': 'Successfully completed my Bachelor\'s degree in Civil Engineering at VUB with excellent results.',
     'timeline.events.education4.title': 'Master Electrical Engineering - DTU',
     'timeline.events.education4.description': 'Starting Master\'s in Electrical Engineering at Technical University of Denmark (DTU) through Double Degree Exchange program with VUB.',
+    
+    // New timeline events with simplified keys
+    'timeline.retail.title': 'Retail & Customer Service',
+    'timeline.retail.description': 'Worked in retail, developed strong communication and customer service skills.',
+    'timeline.tutoring.title': 'Started Private Tutoring',
+    'timeline.tutoring.description': 'Began tutoring students in math, science, and engineering. Helped 50+ students achieve their goals.',
+    'timeline.bachelor.title': 'Bachelor Civil Engineering (VUB)',
+    'timeline.bachelor.description': 'Graduated with distinction from Vrije Universiteit Brussel.',
+    'timeline.business.title': 'Founded Tutoring Business',
+    'timeline.business.description': 'Started my own tutoring company, focusing on personalized education and business management.',
+    'timeline.coach.title': 'Basketball Coach (Black Devils Vorst)',
+    'timeline.coach.description': 'Coached youth basketball team, developed leadership and team-building skills.',
+    'timeline.graduation.title': 'Graduated Bachelor Civil Engineering',
+    'timeline.graduation.description': 'Received excellent grades and completed advanced research projects.',
+    'timeline.master.title': 'Started Master Electrical Engineering (DTU & VUB)',
+    'timeline.master.description': 'Double degree program in Denmark and Belgium, focusing on innovation and international collaboration.',
   },
   nl: {
     'nav.home': 'Home',
@@ -89,7 +116,8 @@ export const ui = {
     'nav.projects': 'Projecten',
     'nav.cv': 'CV',
     'nav.contact': 'Contact',
-    'nav.portfolio': 'Portfolio',
+    'nav.portfolio': 'Vojtěch De Coninck',
+    'nav.welcome': 'Welkom!',
     
     // Home page
     'home.title': 'Welkom bij Mijn Portfolio',
@@ -118,6 +146,10 @@ export const ui = {
     'home.stats.sports.desc': 'Basketbalcoach bij Black Devils Vorst',
     'home.stats.teaching': 'Onderwijs',
     'home.stats.teaching.desc': 'Privé bijles sinds 2021',
+    'home.contact.email': 'vojtechdeconinck@gmail.com',
+    'home.contact.github': 'vojtechdc',
+    'home.contact.location': 'Brussel, België',
+    'home.skills.title': 'Mijn Ervaring',
     
     // Timeline page
     'timeline.title': 'Mijn Reis',
@@ -137,6 +169,14 @@ export const ui = {
     // Projects page
     'projects.title': 'Mijn Projecten',
     'projects.subtitle': 'Een showcase van mijn werk en prestaties',
+    'projects.tutoring.title': 'Privé Bijlesbedrijf',
+    'projects.tutoring.description': 'Professionele bijlesdiensten die studenten helpen excelleren in meerdere vakken waaronder wiskunde, natuurkunde, scheikunde en talen. Gespecialiseerd in gepersonaliseerde leermethoden en examenvoorbereiding.',
+    'projects.thesis.title': 'Civiele Techniek Bachelor Scriptie',
+    'projects.thesis.description': 'Geavanceerd onderzoeksproject gericht op structurele analyse en innovatieve engineering oplossingen. Combinatie van theoretische kennis met praktische toepassingen in moderne bouwtechnieken.',
+    'projects.basketball.title': 'Basketbal Coaching & Leiderschap',
+    'projects.basketball.description': 'Leiden en coachen van jeugd basketbalteams, ontwikkeling van zowel atletische vaardigheden als persoonlijk karakter. Focus op teamwork, discipline en strategisch denken op en naast het veld.',
+    'projects.exchange.title': 'Internationale Engineering Uitwisseling',
+    'projects.exchange.description': 'Dubbele Graad programma aan de Technische Universiteit van Denemarken, gespecialiseerd in geavanceerde elektrotechniek en duurzame technologie oplossingen voor een globaal perspectief.',
     
     // CV page
     'cv.title': 'Curriculum Vitae',
@@ -157,6 +197,22 @@ export const ui = {
     'timeline.events.education3.description': 'Behaalde succesvol mijn Bachelor diploma in Civiele Techniek aan de VUB met uitstekende resultaten.',
     'timeline.events.education4.title': 'Master Elektrotechniek - DTU',
     'timeline.events.education4.description': 'Begin Master in Elektrotechniek aan de Technische Universiteit van Denemarken (DTU) via het Double Degree Exchange programma met VUB.',
+    
+    // New timeline events with simplified keys
+    'timeline.retail.title': 'Retail & Klantenservice',
+    'timeline.retail.description': 'Werkte in de retail, ontwikkelde sterke communicatie- en klantenservicevaardigheden.',
+    'timeline.tutoring.title': 'Privé Bijles Gestart',
+    'timeline.tutoring.description': 'Begon met het bijles geven aan studenten in wiskunde, wetenschappen en engineering. Hielp 50+ studenten hun doelen te bereiken.',
+    'timeline.bachelor.title': 'Bachelor Civiele Techniek (VUB)',
+    'timeline.bachelor.description': 'Afgestudeerd met onderscheiding aan de Vrije Universiteit Brussel.',
+    'timeline.business.title': 'Bijlesbedrijf Opgericht',
+    'timeline.business.description': 'Startte mijn eigen bijlesbedrijf, gericht op gepersonaliseerd onderwijs en bedrijfsvoering.',
+    'timeline.coach.title': 'Basketbalcoach (Black Devils Vorst)',
+    'timeline.coach.description': 'Coachte jeugd basketbalteam, ontwikkelde leiderschap en teambuilding vaardigheden.',
+    'timeline.graduation.title': 'Afgestudeerd Bachelor Civiele Techniek',
+    'timeline.graduation.description': 'Behaalde excellente cijfers en voltooide geavanceerde onderzoeksprojecten.',
+    'timeline.master.title': 'Master Elektrotechniek Gestart (DTU & VUB)',
+    'timeline.master.description': 'Dubbele graad programma in Denemarken en België, gericht op innovatie en internationale samenwerking.',
   },
   cs: {
     'nav.home': 'Domů',
@@ -164,7 +220,8 @@ export const ui = {
     'nav.projects': 'Projekty',
     'nav.cv': 'CV',
     'nav.contact': 'Kontakt',
-    'nav.portfolio': 'Portfolio',
+    'nav.portfolio': 'Vojtěch De Coninck',
+    'nav.welcome': 'Vítejte!',
     
     // Home page
     'home.title': 'Vítejte v Mém Portfoliu',
@@ -193,6 +250,10 @@ export const ui = {
     'home.stats.sports.desc': 'Basketbalový trenér u Black Devils Vorst',
     'home.stats.teaching': 'Vyučování',
     'home.stats.teaching.desc': 'Soukromé doučování od roku 2021',
+    'home.contact.email': 'vojtechdeconinck@gmail.com',
+    'home.contact.github': 'vojtechdc',
+    'home.contact.location': 'Brusel, Belgie',
+    'home.skills.title': 'Moje Zkušenosti',
     
     // Timeline page
     'timeline.title': 'Má Cesta',
@@ -212,6 +273,14 @@ export const ui = {
     // Projects page
     'projects.title': 'Mé Projekty',
     'projects.subtitle': 'Ukázka mé práce a úspěchů',
+    'projects.tutoring.title': 'Soukromé Doučovací Podnikání',
+    'projects.tutoring.description': 'Profesionální doučovací služby pomáhající studentům vyniknout v několika předmětech včetně matematiky, fyziky, chemie a jazyků. Specializace na personalizované metody učení a přípravu na zkoušky.',
+    'projects.thesis.title': 'Bakalářská Práce Stavební Inženýrství',
+    'projects.thesis.description': 'Pokročilý výzkumný projekt zaměřený na strukturální analýzu a inovativní inženýrská řešení. Kombinace teoretických znalostí s praktickými aplikacemi v moderních stavebních technikách.',
+    'projects.basketball.title': 'Basketbalové Koučování & Vedení',
+    'projects.basketball.description': 'Vedení a koučování mládežnických basketbalových týmů, rozvoj atletických dovedností i osobního charakteru. Zaměření na týmovou práci, disciplínu a strategické myšlení na hřišti i mimo něj.',
+    'projects.exchange.title': 'Mezinárodní Inženýrská Výměna',
+    'projects.exchange.description': 'Program Dvojitého Titulu na Technické univerzitě v Dánsku, specializace na pokročilou elektrotechniku a udržitelné technologické řešení pro globální perspektivu.',
     
     // CV page
     'cv.title': 'Curriculum Vitae',
@@ -232,6 +301,22 @@ export const ui = {
     'timeline.events.education3.description': 'Úspěšně jsem dokončil bakalářské studium stavebního inženýrství na VUB s vynikajícími výsledky.',
     'timeline.events.education4.title': 'Magisterské Studium Elektrotechniky - DTU',
     'timeline.events.education4.description': 'Zahajuji magisterské studium elektrotechniky na Technical University of Denmark (DTU) prostřednictvím programu Double Degree Exchange s VUB.',
+    
+    // New timeline events with simplified keys
+    'timeline.retail.title': 'Maloobchod & Zákaznický Servis',
+    'timeline.retail.description': 'Pracoval v maloobchodě, rozvíjel silné komunikační a zákaznické dovednosti.',
+    'timeline.tutoring.title': 'Zahájení Soukromého Doučování',
+    'timeline.tutoring.description': 'Začal doučovat studenty matematiku, vědy a inženýrství. Pomohl 50+ studentům dosáhnout jejich cílů.',
+    'timeline.bachelor.title': 'Bakalář Stavební Inženýrství (VUB)',
+    'timeline.bachelor.description': 'Absolvoval s vyznamenáním z Vrije Universiteit Brussel.',
+    'timeline.business.title': 'Založení Doučovací Firmy',
+    'timeline.business.description': 'Začal vlastní doučovací společnost, zaměřenou na personalizované vzdělávání a řízení podnikání.',
+    'timeline.coach.title': 'Basketbalový Trenér (Black Devils Vorst)',
+    'timeline.coach.description': 'Trénoval mládežnický basketbalový tým, rozvíjel vedení a týmové dovednosti.',
+    'timeline.graduation.title': 'Absolvoval Bakalář Stavební Inženýrství',
+    'timeline.graduation.description': 'Dosáhl vynikajících známek a dokončil pokročilé výzkumné projekty.',
+    'timeline.master.title': 'Zahájil Magisterské Studium Elektrotechniky (DTU & VUB)',
+    'timeline.master.description': 'Dvojitý titul program v Dánsku a Belgii, zaměřený na inovaci a mezinárodní spolupráci.',
   },
   da: {
     'nav.home': 'Hjem',
@@ -239,7 +324,8 @@ export const ui = {
     'nav.projects': 'Projekter',
     'nav.cv': 'CV',
     'nav.contact': 'Kontakt',
-    'nav.portfolio': 'Portfolio',
+    'nav.portfolio': 'Vojtěch De Coninck',
+    'nav.welcome': 'Velkommen!',
     
     // Home page
     'home.title': 'Velkommen til Mit Portfolio',
@@ -268,6 +354,10 @@ export const ui = {
     'home.stats.sports.desc': 'Basketballtræner hos Black Devils Vorst',
     'home.stats.teaching': 'Undervisning',
     'home.stats.teaching.desc': 'Privat undervisning siden 2021',
+    'home.contact.email': 'vojtechdeconinck@gmail.com',
+    'home.contact.github': 'vojtechdc',
+    'home.contact.location': 'Bruxelles, Belgien',
+    'home.skills.title': 'Min Erfaring',
     
     // Timeline page
     'timeline.title': 'Min Rejse',
@@ -287,6 +377,14 @@ export const ui = {
     // Projects page
     'projects.title': 'Mine Projekter',
     'projects.subtitle': 'Et showcase af mit arbejde og præstationer',
+    'projects.tutoring.title': 'Privat Undervisningsvirksomhed',
+    'projects.tutoring.description': 'Professionelle undervisningstjenester der hjælper studerende med at excellere på tværs af flere fag inklusiv matematik, fysik, kemi og sprog. Specialiseret i personlige læringsmetoder og eksamensforberedelse.',
+    'projects.thesis.title': 'Civilingeniør Bachelor Afhandling',
+    'projects.thesis.description': 'Avanceret forskningsprojekt fokuseret på strukturel analyse og innovative ingeniørløsninger. Kombination af teoretisk viden med praktiske anvendelser i moderne byggeteknikker.',
+    'projects.basketball.title': 'Basketball Coaching & Lederskab',
+    'projects.basketball.description': 'Ledelse og coaching af ungdoms basketballhold, udvikling af både atletiske færdigheder og personlig karakter. Fokus på teamwork, disciplin og strategisk tænkning på og uden for banen.',
+    'projects.exchange.title': 'International Ingeniør Udveksling',
+    'projects.exchange.description': 'Dobbelt Grad program på Danmarks Tekniske Universitet, specialiseret i avanceret elektroteknik og bæredygtige teknologiløsninger for et globalt perspektiv.',
     
     // CV page
     'cv.title': 'Curriculum Vitae',
@@ -307,5 +405,21 @@ export const ui = {
     'timeline.events.education3.description': 'Gennemførte succesfuldt min bachelorgrad i civilingeniørarbejde på VUB med fremragende resultater.',
     'timeline.events.education4.title': 'Kandidat Elektroteknik - DTU',
     'timeline.events.education4.description': 'Starter kandidatgrad i elektroteknik på Danmarks Tekniske Universitet (DTU) gennem Double Degree Exchange program med VUB.',
+    
+    // New timeline events with simplified keys
+    'timeline.retail.title': 'Detail & Kundeservice',
+    'timeline.retail.description': 'Arbejdede i detailhandlen, udviklede stærke kommunikations- og kundeservicefærdigheder.',
+    'timeline.tutoring.title': 'Startede Privat Undervisning',
+    'timeline.tutoring.description': 'Begyndte at undervise studerende i matematik, naturvidenskab og ingeniørarbejde. Hjalp 50+ studerende med at opnå deres mål.',
+    'timeline.bachelor.title': 'Bachelor Civilingeniør (VUB)',
+    'timeline.bachelor.description': 'Dimitterede med udmærkelse fra Vrije Universiteit Brussel.',
+    'timeline.business.title': 'Grundlagde Undervisningsvirksomhed',
+    'timeline.business.description': 'Startede min egen undervisningsvirksomhed, fokuseret på personlig uddannelse og forretningsledelse.',
+    'timeline.coach.title': 'Basketballtræner (Black Devils Vorst)',
+    'timeline.coach.description': 'Trænede ungdoms basketballhold, udviklede lederskab og teambuilding færdigheder.',
+    'timeline.graduation.title': 'Dimitterede Bachelor Civilingeniør',
+    'timeline.graduation.description': 'Opnåede fremragende karakterer og gennemførte avancerede forskningsprojekter.',
+    'timeline.master.title': 'Startede Kandidat Elektroteknik (DTU & VUB)',
+    'timeline.master.description': 'Dobbelt grad program i Danmark og Belgien, fokuseret på innovation og internationalt samarbejde.',
   },
 } as const;

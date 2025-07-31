@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const projects = [
+  {
+    id: 1,
+    titleKey: "projects.tutoring.title",
+    descriptionKey: "projects.tutoring.description",
+    image: "/images/project-tutoring.jpg",
+    technologies: ["Business Management", "Education", "Customer Service", "Marketing"],
+    status: "Active",
+    year: "2023-Present",
+    category: "Business",
+    links: {
+      website: "https://your-tutoring-website.com", // Vervang met je echte website
+      contact: "mailto:vojtadeconinck@gmail.com"
+    },
+    highlights: ["50+ Students Taught", "5⭐ Average Rating", "Multiple Subjects"]
+  },
+  {
+    id: 2,
+    titleKey: "projects.thesis.title", 
+    descriptionKey: "projects.thesis.description",
+    image: "/images/project-thesis.jpg",
+    technologies: ["Civil Engineering", "Research", "Analysis", "AutoCAD", "MATLAB"],
+    status: "Completed",
+    year: "2025",
+    category: "Academic",
+    links: {
+      github: "https://github.com/VojtaDC/bachelor-thesis", // Vervang met echte link als beschikbaar
+      pdf: "/documents/thesis.pdf" // Upload je thesis PDF
+    },
+    highlights: ["Excellent Grade", "Advanced Analysis", "Innovative Solutions"]
+  },
+  {
+    id: 3,
+    titleKey: "projects.basketball.title",
+    descriptionKey: "projects.basketball.description", 
+    image: "/images/project-basketball.jpg",
+    technologies: ["Leadership", "Sports Management", "Team Building", "Youth Development"],
+    status: "Completed",
+    year: "2024-2025",
+    category: "Sports",
+    links: {
+      website: "https://www.blackdevils.be", // Vervang met echte club website
+    },
+    highlights: ["15+ Players Coached", "Team Development", "Leadership Skills"]
+  },
+  {
+    id: 4,
+    titleKey: "projects.exchange.title",
+    descriptionKey: "projects.exchange.description",
+    image: "/images/project-exchange.jpg", 
+    technologies: ["International Collaboration", "Electrical Engineering", "Academic Excellence", "Cultural Exchange"],
+    status: "In Progress",
+    year: "2025-2027",
+    category: "Academic",
+    links: {
+      university: "https://www.dtu.dk",
+      program: "https://www.vub.be/en/studying-vub/exchange-programmes"
+    },
+    highlights: ["Double Degree", "International Experience", "Advanced Engineering"]
+  }
+];
+---
+
+<BaseLayout>
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Hero Section -->
+    <section class="py-20 px-6" data-aos="fade-up">
+      <div class="container mx-auto text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
+          {t('projects.title')}
+        </h1>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+          {t('projects.subtitle')}
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="py-16 px-6">
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-gray-800 text-center mb-12" data-aos="fade-up">Mijn Diploma & Ervaring</h2>
+        <div class="max-w-2xl mx-auto">
+          <ul class="timeline">
+            <li class="mb-10">
+              <div class="flex items-center mb-2">
+                <span class="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold">2025</span>
+                <span class="ml-4 text-lg font-bold text-gray-800">Bachelor Civiele Ingenieur</span>
+              </div>
+              <p class="ml-12 text-gray-700">Vrije Universiteit Brussel - Geslaagd met onderscheiding</p>
+            </li>
+            <li class="mb-10">
+              <div class="flex items-center mb-2">
+                <span class="bg-green-600 text-white px-4 py-2 rounded-full font-semibold">2025-2027</span>
+                <span class="ml-4 text-lg font-bold text-gray-800">Master Electrical Engineering</span>
+              </div>
+              <p class="ml-12 text-gray-700">DTU Denmark & VUB Brussel - Double Degree Program</p>
+            </li>
+            <li class="mb-10">
+              <div class="flex items-center mb-2">
+                <span class="bg-purple-600 text-white px-4 py-2 rounded-full font-semibold">2023-Present</span>
+                <span class="ml-4 text-lg font-bold text-gray-800">Bijlesdocent & Ondernemer</span>
+              </div>
+              <p class="ml-12 text-gray-700">Eigen bedrijf, 50+ studenten geholpen, 5⭐ rating</p>
+            </li>
+            <li class="mb-10">
+              <div class="flex items-center mb-2">
+                <span class="bg-orange-600 text-white px-4 py-2 rounded-full font-semibold">2024-2025</span>
+                <span class="ml-4 text-lg font-bold text-gray-800">Basketbalcoach</span>
+              </div>
+              <p class="ml-12 text-gray-700">Black Devils - Teamontwikkeling en leiderschap</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="py-20 px-6 bg-white">
+      <div class="container mx-auto">
+        <h2 class="text-4xl font-bold text-gray-800 text-center mb-12" data-aos="fade-up">
+          Skills & Technologies
+        </h2>
+        
+        <div class="grid md:grid-cols-4 gap-8">
+          <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+            <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">⚡</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Engineering</h3>
+            <p class="text-gray-600 text-sm">Civil & Electrical Engineering principles and applications</p>
+          </div>
+          
+          <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">📚</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Education</h3>
+            <p class="text-gray-600 text-sm">Professional tutoring and educational program development</p>
+          </div>
+          
+          <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">💼</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Business</h3>
+            <p class="text-gray-600 text-sm">Entrepreneurship, business management, and customer relations</p>
+          </div>
+          
+          <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span class="text-2xl">🏀</span>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">Leadership</h3>
+            <p class="text-gray-600 text-sm">Team management, coaching, and sports leadership</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Future Projects Section -->
+    <section class="py-20 px-6 bg-gray-50">
+      <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-bold text-gray-800 mb-6" data-aos="fade-up">What's Coming Next</h2>
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+          Currently working on exciting new projects during my Master's program at DTU, Denmark. 
+          Stay tuned for updates on electrical engineering innovations and research projects.
+        </p>
+        <div class="space-x-4" data-aos="fade-up" data-aos-delay="400">
+          <a 
+            href="/timeline/" 
+            class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+          >
+            View My Journey
+          </a>
+          <a 
+            href="/contact/" 
+            class="inline-block bg-white hover:bg-gray-50 text-gray-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-gray-200"
+          >
+            Collaborate With Me
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

@@ -8,7 +8,7 @@ const currentLang = getLangFromUrl(Astro.url);
 <div class="language-selector relative inline-block">
   <select 
     id="language-select" 
-    class="bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+    class="theme-input rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent border transition-all duration-300"
   >
     {Object.entries(languages).map(([lang, name]) => (
       <option value={lang} selected={lang === currentLang}>

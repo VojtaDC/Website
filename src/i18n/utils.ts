@@ -13,21 +13,27 @@ export function useTranslations(lang: keyof typeof ui) {
 }
 
 export function getStaticPaths() {
-  return Object.keys(ui).map((lang) => ({
-    params: { lang },
-  }));
+  // Only return non-default languages for [lang] routes
+  // Default language (en) uses direct routes without prefix
+  return Object.keys(ui)
+    .filter(lang => lang !== defaultLang)
+    .map((lang) => ({
+      params: { lang },
+    }));
 }
 
 // Get the path for a specific language
 export function getLocalizedPath(path: string, lang: keyof typeof ui) {
   // Remove leading slash if present
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-  
+  let cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // Always add trailing slash unless empty
+  if (cleanPath && !cleanPath.endsWith('/')) {
+    cleanPath += '/';
+  }
   // For default language (en), don't add prefix
   if (lang === defaultLang) {
     return `/${cleanPath}`;
   }
-  
   // For other languages, add language prefix
   return `/${lang}/${cleanPath}`;
 }

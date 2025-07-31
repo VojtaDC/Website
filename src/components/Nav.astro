@@ -5,6 +5,10 @@ import LanguageSelector from './LanguageSelector.astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+// Check if we're on the homepage
+const currentPath = Astro.url.pathname;
+const isHomePage = currentPath === '/' || currentPath === `/${lang}/` || currentPath === `/${lang}`;
+
 const links = [
   { href: getLocalizedPath('', lang), text: t('nav.home') },
   { href: getLocalizedPath('timeline', lang), text: t('nav.timeline') },
@@ -13,11 +17,11 @@ const links = [
   { href: getLocalizedPath('contact', lang), text: t('nav.contact') },
 ];
 ---
-<nav class="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-sm bg-white/95">
+<nav class="shadow-lg sticky top-0 z-50 backdrop-blur-sm border-b nav-theme">
   <div class="container mx-auto px-6 py-4">
     <div class="flex justify-between items-center">
-      <a href={getLocalizedPath('', lang)} class="text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors duration-300">
-        {t('nav.portfolio')}
+      <a href={getLocalizedPath('', lang)} class="text-2xl font-bold transition-colors duration-300 nav-title">
+        {isHomePage ? t('nav.welcome') : t('nav.portfolio')}
       </a>
       <div class="flex items-center space-x-4">
         <ul class="hidden md:flex space-x-8">
@@ -25,18 +29,29 @@ const links = [
           <li>
             <a 
               href={link.href} 
-              class="relative text-gray-700 hover:text-blue-600 font-medium transition-all duration-300 hover:scale-105 group"
+              class="relative font-medium transition-all duration-300 hover:scale-105 group nav-link"
             >
               {link.text}
-              <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              <span class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full nav-underline"></span>
             </a>
           </li>
         ))}
       </ul>
+      
+      <!-- Theme Toggle Button -->
+      <button id="theme-toggle" class="relative p-2 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white transition-all duration-300 transform hover:scale-105 border border-gray-600 shadow-lg">
+        <svg id="sun-icon" class="w-5 h-5 hidden transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.28 17.303a.75.75 0 00-1.06 1.06l1.59 1.591a.75.75 0 001.061-1.06l-1.59-1.591zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+        </svg>
+        <svg id="moon-icon" class="w-5 h-5 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
+        </svg>
+      </button>
+      
       <LanguageSelector />
       </div>
       <!-- Mobile menu button -->
-      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300">
+      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-gray-800 text-white transition-colors duration-300">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
@@ -49,7 +64,7 @@ const links = [
           <li>
             <a 
               href={link.href} 
-              class="block py-2 px-4 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-300"
+              class="block py-2 px-4 text-gray-300 hover:text-blue-400 hover:bg-gray-800 rounded-lg transition-all duration-300"
             >
               {link.text}
             </a>
@@ -64,11 +79,125 @@ const links = [
   document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
     
+    // Mobile menu functionality
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('hidden');
       });
+    }
+    
+    // Theme toggle functionality
+    if (themeToggle && sunIcon && moonIcon) {
+      // Get current theme from localStorage or default to dark
+      let currentTheme = localStorage.getItem('theme') || 'dark';
+      
+      // Apply theme on page load
+      applyTheme(currentTheme);
+      
+      themeToggle.addEventListener('click', () => {
+        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        applyTheme(currentTheme);
+        localStorage.setItem('theme', currentTheme);
+      });
+      
+      function applyTheme(theme) {
+        const body = document.body;
+        const nav = document.querySelector('nav');
+        
+        if (theme === 'light') {
+          // Light theme
+          body.setAttribute('data-theme', 'light');
+          body.className = 'min-h-screen font-Inter antialiased theme-transition bg-gray-50 text-gray-800';
+          
+          if (nav) {
+            nav.className = 'shadow-lg sticky top-0 z-50 backdrop-blur-sm border-b nav-theme bg-white/95 border-gray-200';
+            
+            // Update logo/title
+            const title = nav.querySelector('a[href*="/"]');
+            if (title) {
+              title.className = 'text-2xl font-bold transition-colors duration-300 nav-title text-gray-800 hover:text-blue-600';
+            }
+            
+            // Update nav links
+            const links = nav.querySelectorAll('.nav-link');
+            links.forEach(link => {
+              link.className = 'relative font-medium transition-all duration-300 hover:scale-105 group nav-link text-gray-700 hover:text-blue-600';
+              const span = link.querySelector('span');
+              if (span) {
+                span.className = 'absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full nav-underline bg-blue-600';
+              }
+            });
+            
+            // Update language selector
+            const langSelect = document.getElementById('language-select');
+            if (langSelect) {
+              langSelect.className = 'theme-input rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent border transition-all duration-300 bg-white border-gray-300 text-gray-800';
+            }
+            
+            // Update mobile menu button
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            if (mobileBtn) {
+              mobileBtn.className = 'md:hidden p-2 rounded-lg hover:bg-gray-100 text-gray-800 transition-colors duration-300';
+            }
+            
+            // Update theme toggle for light mode
+            if (themeToggle) {
+              themeToggle.className = 'relative p-2 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 transition-all duration-300 transform hover:scale-105 border border-gray-300 shadow-lg';
+            }
+          }
+          
+          sunIcon.classList.add('hidden');
+          moonIcon.classList.remove('hidden');
+        } else {
+          // Dark theme
+          body.setAttribute('data-theme', 'dark');
+          body.className = 'min-h-screen font-Inter antialiased theme-transition bg-black text-white';
+          
+          if (nav) {
+            nav.className = 'shadow-lg sticky top-0 z-50 backdrop-blur-sm border-b nav-theme bg-black/95 border-gray-800';
+            
+            // Update logo/title
+            const title = nav.querySelector('a[href*="/"]');
+            if (title) {
+              title.className = 'text-2xl font-bold transition-colors duration-300 nav-title text-white hover:text-blue-400';
+            }
+            
+            // Update nav links
+            const links = nav.querySelectorAll('.nav-link');
+            links.forEach(link => {
+              link.className = 'relative font-medium transition-all duration-300 hover:scale-105 group nav-link text-gray-300 hover:text-blue-400';
+              const span = link.querySelector('span');
+              if (span) {
+                span.className = 'absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full nav-underline bg-blue-400';
+              }
+            });
+            
+            // Update language selector
+            const langSelect = document.getElementById('language-select');
+            if (langSelect) {
+              langSelect.className = 'theme-input rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent border transition-all duration-300 bg-gray-800 border-gray-600 text-white';
+            }
+            
+            // Update mobile menu button
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            if (mobileBtn) {
+              mobileBtn.className = 'md:hidden p-2 rounded-lg hover:bg-gray-800 text-white transition-colors duration-300';
+            }
+            
+            // Update theme toggle for dark mode
+            if (themeToggle) {
+              themeToggle.className = 'relative p-2 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white transition-all duration-300 transform hover:scale-105 border border-gray-600 shadow-lg';
+            }
+          }
+          
+          sunIcon.classList.remove('hidden');
+          moonIcon.classList.add('hidden');
+        }
+      }
     }
   });
 </script>

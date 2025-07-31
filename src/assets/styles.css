@@ -2,6 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme variables */
+:root {
+  /* Light theme (default) */
+  --bg-primary: theme('colors.gray.50');
+  --bg-secondary: theme('colors.white');
+  --bg-tertiary: theme('colors.gray.100');
+  --text-primary: theme('colors.gray.900');
+  --text-secondary: theme('colors.gray.700');
+  --text-muted: theme('colors.gray.500');
+  --border-color: theme('colors.gray.200');
+  --nav-bg: theme('colors.white');
+  --nav-border: theme('colors.gray.200');
+  --card-bg: theme('colors.white');
+  --input-bg: theme('colors.white');
+  --input-border: theme('colors.gray.300');
+  --blue-primary: theme('colors.blue.600');
+  --blue-hover: theme('colors.blue.700');
+  --blue-light: theme('colors.blue.50');
+  
+  /* Homepage specific variables */
+  --hero-bg: theme('colors.white');
+  --hero-text: theme('colors.gray.900');
+  --hero-subtitle: theme('colors.gray.600');
+  --particles-color: theme('colors.blue.600');
+  --particles-lines: theme('colors.blue.400');
+  --section-bg: theme('colors.gray.50');
+}
+
+[data-theme="dark"] {
+  /* Dark theme */
+  --bg-primary: theme('colors.black');
+  --bg-secondary: theme('colors.gray.900');
+  --bg-tertiary: theme('colors.gray.800');
+  --text-primary: theme('colors.white');
+  --text-secondary: theme('colors.gray.300');
+  --text-muted: theme('colors.gray.400');
+  --border-color: theme('colors.gray.700');
+  --nav-bg: theme('colors.black');
+  --nav-border: theme('colors.gray.800');
+  --card-bg: theme('colors.gray.900');
+  --input-bg: theme('colors.gray.800');
+  --input-border: theme('colors.gray.600');
+  --blue-primary: theme('colors.blue.400');
+  --blue-hover: theme('colors.blue.300');
+  --blue-light: theme('colors.blue.900');
+  
+  /* Homepage specific variables - dark theme */
+  --hero-bg: theme('colors.black');
+  --hero-text: theme('colors.white');
+  --hero-subtitle: theme('colors.gray.300');
+  --particles-color: theme('colors.white');
+  --particles-lines: theme('colors.white');
+  --section-bg: theme('colors.black');
+}
+
 /* Custom styles for smooth animations and better user experience */
 @layer base {
   html {
@@ -10,10 +65,57 @@
   
   body {
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
 @layer components {
+  /* Theme-aware navigation styles */
+  .nav-theme {
+    background-color: var(--nav-bg);
+    border-color: var(--nav-border);
+  }
+  
+  .nav-title {
+    color: var(--text-primary);
+  }
+  
+  .nav-title:hover {
+    color: var(--blue-primary);
+  }
+  
+  .nav-link {
+    color: var(--text-secondary);
+  }
+  
+  .nav-link:hover {
+    color: var(--blue-primary);
+  }
+  
+  .nav-underline {
+    background-color: var(--blue-primary);
+  }
+  
+  /* Theme-aware components */
+  .theme-card {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+  }
+  
+  .theme-input {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-primary);
+  }
+  
+  .theme-input:focus {
+    border-color: var(--blue-primary);
+    box-shadow: 0 0 0 2px var(--blue-light);
+  }
+  
   .btn-primary {
     @apply bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300;
   }
@@ -24,6 +126,37 @@
   
   .card {
     @apply bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 hover:scale-105;
+  }
+  
+  /* Theme transition */
+  .theme-transition {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Homepage theme classes */
+  .hero-section {
+    background-color: var(--hero-bg);
+    color: var(--hero-text);
+  }
+  
+  .hero-subtitle {
+    color: var(--hero-subtitle);
+  }
+  
+  .section-bg {
+    background-color: var(--section-bg);
+  }
+  
+  .theme-text {
+    color: var(--text-primary);
+  }
+  
+  .theme-text-secondary {
+    color: var(--text-secondary);
+  }
+  
+  .theme-text-muted {
+    color: var(--text-muted);
   }
 }
 

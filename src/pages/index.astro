@@ -6,122 +6,351 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 <BaseLayout>
+  <!-- Header Text -->
+  <header class="absolute top-4 left-4 text-2xl font-bold text-white">
+    Welcome!
+  </header>
+
   <!-- Hero Section -->
-  <section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 -mt-8">
-    <div class="container mx-auto px-6 text-center">
-      <div data-aos="fade-up" data-aos-duration="1000">
-        <h1 class="text-5xl md:text-7xl font-bold text-gray-800 mb-6">
-          {t('home.title').split(' ').slice(0, -1).join(' ')}
-          <span class="text-blue-600 block">{t('home.title').split(' ').slice(-1)}</span>
-        </h1>
-        <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-          {t('home.description')}
-        </p>
-        <div class="space-x-4 space-y-4 md:space-y-0">
-          <a 
-            href={getLocalizedPath('timeline', lang)}
-            class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-          >
-            {t('home.journey')}
-          </a>
-          <a 
-            href={getLocalizedPath('projects', lang)}
-            class="inline-block bg-white hover:bg-gray-50 text-gray-800 px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-gray-200"
-          >
-            {t('home.projects')}
-          </a>
+  <section class="min-h-screen flex items-center justify-center relative hero-section overflow-hidden theme-transition">
+    <!-- Animated Background - only for hero section -->
+    <div id="particles-container" class="absolute inset-0 pointer-events-auto z-1"></div>
+    
+    <div class="relative z-10 text-center">
+      <!-- Profile Image -->
+      <div class="mb-8">
+        <div class="w-64 h-64 mx-auto rounded-full overflow-hidden shadow-2xl border-4 border-white/20 backdrop-blur-sm">
+          <img 
+            src="/images/profile-photo.jpg" 
+            alt={t('home.title')}
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+          />
+          <!-- Fallback placeholder -->
+          <div class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-6xl font-bold">
+            VD
+          </div>
         </div>
       </div>
-      
+
+      <!-- Name and Title -->
+      <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-wide text-gradient">
+        Vojtěch De Coninck
+      </h1>
+      <p class="text-xl md:text-2xl hero-subtitle mb-12 font-light text-gray-700 dark:text-white hover:text-blue-400 transition-colors duration-300 cursor-default">
+        <span class="font-bold text-gray-500 dark:text-white hover:text-blue-400">Msc. Electrical Engineering</span> student
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+        <a 
+          href={getLocalizedPath('contact', lang)}
+          class="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+        >
+          {t('nav.contact')}
+        </a>
+        <a 
+          href={getLocalizedPath('projects', lang)}
+          class="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-105"
+        >
+          {t('nav.projects')}
+        </a>
+      </div>
+
       <!-- Scroll indicator -->
-      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2" data-aos="fade-up" data-aos-delay="1500">
-        <div class="animate-bounce">
-          <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
+      <div class="flex justify-center animate-bounce">
+        <svg class="w-6 h-6 theme-text" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
       </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section class="py-20 px-6 bg-white">
-    <div class="container mx-auto">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div data-aos="fade-right">
-          <h2 class="text-4xl font-bold text-gray-800 mb-6">{t('home.about')}</h2>
-          <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-            {t('home.about.text1')}
-          </p>
-          <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-            {t('home.about.text2')}
-          </p>
-          <a 
-            href={getLocalizedPath('cv', lang)}
-            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-          >
-            {t('cv.title')}
-            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-          </a>
+  <section class="py-20 px-6 section-bg theme-transition">
+    <div class="container mx-auto text-center">
+      <!-- Section Title -->
+      <h2 class="text-4xl font-bold theme-text mb-12">{t('home.about.title')}</h2>
+      
+      <!-- Profile Image -->
+      <div class="mb-8">
+        <div class="w-32 h-32 mx-auto rounded-full overflow-hidden shadow-lg border-4 border-white/20 backdrop-blur-sm">
+          <img 
+            src="/images/profile-casual.jpg" 
+            alt="About me photo"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+          />
+          <!-- Fallback placeholder -->
+          <div class="w-full h-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-4xl font-bold">
+            👋
+          </div>
         </div>
-        <div class="grid grid-cols-2 gap-6" data-aos="fade-left">
-          <div class="bg-blue-50 p-6 rounded-xl text-center hover:shadow-lg transition-shadow duration-300">
-            <div class="text-3xl mb-3">🎓</div>
-            <h3 class="font-bold text-gray-800 mb-2">{t('home.stats.education')}</h3>
-            <p class="text-gray-600 text-sm">{t('home.stats.education.desc')}</p>
-          </div>
-          <div class="bg-green-50 p-6 rounded-xl text-center hover:shadow-lg transition-shadow duration-300">
-            <div class="text-3xl mb-3">💼</div>
-            <h3 class="font-bold text-gray-800 mb-2">{t('home.stats.business')}</h3>
-            <p class="text-gray-600 text-sm">{t('home.stats.business.desc')}</p>
-          </div>
-          <div class="bg-purple-50 p-6 rounded-xl text-center hover:shadow-lg transition-shadow duration-300">
-            <div class="text-3xl mb-3">🏀</div>
-            <h3 class="font-bold text-gray-800 mb-2">{t('home.stats.sports')}</h3>
-            <p class="text-gray-600 text-sm">{t('home.stats.sports.desc')}</p>
-          </div>
-          <div class="bg-orange-50 p-6 rounded-xl text-center hover:shadow-lg transition-shadow duration-300">
-            <div class="text-3xl mb-3">📚</div>
-            <h3 class="font-bold text-gray-800 mb-2">{t('home.stats.teaching')}</h3>
-            <p class="text-gray-600 text-sm">{t('home.stats.teaching.desc')}</p>
-          </div>
+      </div>
+      <p class="text-lg theme-text-secondary mb-8 leading-relaxed max-w-3xl mx-auto">
+        {t('home.about.text1')}
+      </p>
+      
+      <!-- Contact Info -->
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div class="flex items-center justify-center space-x-3 theme-text">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          <span>{t('home.contact.email')}</span>
+        </div>
+        <div class="flex items-center justify-center space-x-3 theme-text">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          <span>{t('home.contact.github')}</span>
+        </div>
+        <div class="flex items-center justify-center space-x-3 theme-text">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          <span>{t('home.contact.location')}</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Quick Links Section -->
-  <section class="py-20 px-6 bg-gray-50">
+  <!-- Skills Section -->
+  <section class="py-20 px-6 section-bg theme-transition">
     <div class="container mx-auto text-center">
-      <h2 class="text-4xl font-bold text-gray-800 mb-12" data-aos="fade-up">{t('home.explore')}</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
-          <div class="text-4xl mb-4">📈</div>
-          <h3 class="text-xl font-bold text-gray-800 mb-4">{t('home.cards.timeline.title')}</h3>
-          <p class="text-gray-600 mb-6">{t('home.cards.timeline.description')}</p>
-          <a href={getLocalizedPath('timeline', lang)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
-            {t('home.cards.timeline.link')}
-          </a>
+      <h2 class="text-4xl font-bold theme-text mb-12">{t('home.skills.title')}</h2>
+      
+      <!-- Experience Cards -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <!-- Coding -->
+        <div class="theme-card p-6 rounded-xl border theme-transition hover:border-blue-500 transition-all duration-300">
+          <div class="text-4xl mb-4">💻</div>
+          <h3 class="text-xl font-bold theme-text mb-2">Coding</h3>
+          <ul class="theme-text-muted text-sm space-y-1">
+            <li>Python</li>
+            <li>C++</li>
+            <li>Java</li>
+            <li>Assembly</li>
+            <li>Matlab</li>
+          </ul>
         </div>
-        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-          <div class="text-4xl mb-4">🚀</div>
-          <h3 class="text-xl font-bold text-gray-800 mb-4">{t('home.cards.projects.title')}</h3>
-          <p class="text-gray-600 mb-6">{t('home.cards.projects.description')}</p>
-          <a href={getLocalizedPath('projects', lang)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
-            {t('home.cards.projects.link')}
-          </a>
+
+        <!-- CAD & Design -->
+        <div class="theme-card p-6 rounded-xl border theme-transition hover:border-green-500 transition-all duration-300">
+          <div class="text-4xl mb-4">📐</div>
+          <h3 class="text-xl font-bold theme-text mb-2">CAD & Design</h3>
+          <ul class="theme-text-muted text-sm space-y-1">
+            <li>Altium Designer</li>
+            <li>Autodesk Inventor</li>
+            <li>Fusion 360</li>
+          </ul>
         </div>
-        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
-          <div class="text-4xl mb-4">💬</div>
-          <h3 class="text-xl font-bold text-gray-800 mb-4">{t('home.cards.contact.title')}</h3>
-          <p class="text-gray-600 mb-6">{t('home.cards.contact.description')}</p>
-          <a href={getLocalizedPath('contact', lang)} class="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-300">
-            {t('home.cards.contact.link')}
-          </a>
+
+        <!-- Tutoring -->
+        <div class="theme-card p-6 rounded-xl border theme-transition hover:border-purple-500 transition-all duration-300">
+          <div class="text-4xl mb-4">�</div>
+          <h3 class="text-xl font-bold theme-text mb-2">Tutoring</h3>
+          <ul class="theme-text-muted text-sm space-y-1">
+            <li>Maths</li>
+            <li>Physics</li>
+            <li>Chemistry</li>
+            <li>Python</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Interests -->
+      <div class="text-center">
+        <h3 class="text-2xl font-bold theme-text mb-6">Interests</h3>
+        <div class="flex flex-wrap justify-center gap-4">
+          <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">Engineering</span>
+          <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-medium">Coding</span>
+          <span class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-medium">AI</span>
+          <span class="bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium">Basketball</span>
+          <span class="bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-medium">Cycling</span>
+          <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-medium">Coffee</span>
+          <span class="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full text-sm font-medium">Travelling in Nature</span>
         </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  /* Particle style - only for hero section */
+  #particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+    z-index: 1;
+  }
+  
+  /* Ensure content is above particles but allows mouse events through */
+  .relative.z-10 {
+    pointer-events: auto;
+    z-index: 10;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+<script>
+  // Initialize tsParticles - similar to Vojtech Nerad's website
+  document.addEventListener('DOMContentLoaded', async () => {
+    
+    // Function to get current theme
+    function getCurrentTheme() {
+      return document.documentElement.getAttribute('data-theme') || 'light';
+    }
+    
+    // Function to get particle colors based on theme
+    function getParticleColors() {
+      const theme = getCurrentTheme();
+      if (theme === 'dark') {
+        return {
+          particles: "#ffffff",
+          lines: "#ffffff"
+        };
+      } else {
+        return {
+          particles: "#3b82f6", // blue-600
+          lines: "#60a5fa"      // blue-400
+        };
+      }
+    }
+    
+    // Function to update particles
+    function updateParticles() {
+      const colors = getParticleColors();
+      const container = tsParticles.domItem(0);
+      if (container) {
+        container.options.particles.color.value = colors.particles;
+        container.options.particles.lineLinked.color = colors.lines;
+        container.refresh();
+      }
+    }
+    
+    const colors = getParticleColors();
+    
+    await tsParticles.load("particles-container", {
+      fullScreen: {
+        enable: false
+      },
+      background: {
+        color: {
+          value: "transparent"
+        }
+      },
+      fpsLimit: 120,
+      particles: {
+        number: {
+          value: 80,
+          density: {
+            enable: true,
+            area: 800
+          }
+        },
+        color: {
+          value: colors.particles
+        },
+        shape: {
+          type: "circle"
+        },
+        opacity: {
+          value: 0.7,
+          random: false,
+          animation: {
+            enable: false
+          }
+        },
+        size: {
+          value: 4,
+          random: true,
+          animation: {
+            enable: false
+          }
+        },
+        lineLinked: {
+          enable: true,
+          distance: 150,
+          color: colors.lines,
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 0.5,
+          direction: "none",
+          random: false,
+          straight: false,
+          outModes: {
+            default: "bounce"
+          },
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detectsOn: "canvas",
+        events: {
+          onHover: {
+            enable: true,
+            mode: "attract"
+          },
+          onClick: {
+            enable: true,
+            mode: "push"
+          },
+          resize: true
+        },
+        modes: {
+          attract: {
+            distance: 300,
+            duration: 1,
+            factor: 2
+          },
+          grab: {
+            distance: 400,
+            lineLinked: {
+              opacity: 1
+            }
+          },
+          bubble: {
+            distance: 400,
+            size: 40,
+            duration: 2,
+            opacity: 8,
+            speed: 4
+          },
+          push: {
+            quantity: 3,
+            particles_nb: 3
+          },
+          remove: {
+            quantity: 2
+          }
+        }
+      },
+      detectRetina: true
+    });
+    
+    // Listen for theme changes and update particles
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+          updateParticles();
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+  });
+</script>
