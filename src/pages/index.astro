@@ -247,6 +247,37 @@ const t = useTranslations(lang);
         return;
       }
       
+      // Wait for container to have dimensions
+      function waitForDimensions() {
+        const width = container.offsetWidth;
+        const height = container.offsetHeight;
+        
+        updateDebug('Checking dimensions: ' + width + 'x' + height);
+        
+        if (width === 0 || height === 0) {
+          updateDebug('Container has no dimensions, retrying in 100ms...');
+          setTimeout(waitForDimensions, 100);
+          return;
+        }
+        
+        updateDebug('Container has dimensions: ' + width + 'x' + height + ' - Creating canvas...');
+        createParticleSystem();
+      }
+      
+      waitForDimensions();
+    }
+    
+    function createParticleSystem() {
+      const debugDiv = document.getElementById('debug-info');
+      const container = document.getElementById('particles-container');
+      
+      function updateDebug(message) {
+        if (debugDiv) {
+          debugDiv.innerHTML = message;
+          console.log(message);
+        }
+      }
+      
       updateDebug('Container found, creating canvas...');
       
       // Create canvas for particles
