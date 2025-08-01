@@ -268,7 +268,7 @@ const t = useTranslations(lang);
       function resizeCanvas() {
         canvas.width = container.offsetWidth;
         canvas.height = container.offsetHeight;
-        updateDebug('Canvas: ' + canvas.width + 'x' + canvas.height + ' | Particles: ' + particles.length);
+        updateDebug('Canvas: ' + canvas.width + 'x' + canvas.height + ' | Container: ' + container.offsetWidth + 'x' + container.offsetHeight);
       }
       
       resizeCanvas();
@@ -381,8 +381,17 @@ const t = useTranslations(lang);
       }
       
       // Animation loop
+      let frameCount = 0;
       function animate() {
+        frameCount++;
+        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Debug info every 60 frames (about once per second)
+        if (frameCount % 60 === 0) {
+          const theme = getCurrentTheme();
+          updateDebug('Frame ' + frameCount + ' | Canvas: ' + canvas.width + 'x' + canvas.height + ' | Theme: ' + theme + ' | Mouse: ' + (mouse.x !== null ? 'active' : 'none'));
+        }
         
         // Update and draw particles
         for (let i = 0; i < particles.length; i++) {
