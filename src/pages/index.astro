@@ -222,6 +222,136 @@ const t = useTranslations(lang);
   }
 </style>
 
+<script is:inline>
+  // Vanilla JavaScript particle system - no dependencies
+  (function() {
+    'use strict';
+    
+    console.log('Particle script starting v3...');
+    console.log('Document ready state:', document.readyState);
+    console.log('Current timestamp:', new Date().toISOString());
+    
+    function initParticles() {
+      var debugDiv = document.getElementById('debug-info');
+      
+      function updateDebug(message) {
+        console.log('[PARTICLES]', message);
+        if (debugDiv) {
+          debugDiv.innerHTML = message;
+        }
+      }
+      
+      updateDebug('Initializing particles v3...');
+      
+      var container = document.getElementById('particles-container');
+      if (!container) {
+        updateDebug('ERROR: Particles container not found!');
+        return;
+      }
+      
+      // Immediate dimension check
+      var width = container.offsetWidth || 1200;
+      var height = container.offsetHeight || 800;
+      
+      updateDebug('Container dimensions: ' + width + 'x' + height);
+      
+      if (width > 0 && height > 0) {
+        createSimpleParticles(container, width, height, updateDebug);
+      } else {
+        updateDebug('ERROR: Invalid dimensions');
+      }
+    }
+    
+    function createSimpleParticles(container, width, height, updateDebug) {
+      updateDebug('Creating simple particle system...');
+      
+      var canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      canvas.style.position = 'absolute';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100%';
+      canvas.style.height = '100%';
+      
+      var ctx = canvas.getContext('2d');
+      if (!ctx) {
+        updateDebug('ERROR: Canvas context failed');
+        return;
+      }
+      
+      container.appendChild(canvas);
+      updateDebug('Canvas added to container');
+      
+      // Simple particles array
+      var particles = [];
+      for (var i = 0; i < 30; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 1,
+          vy: (Math.random() - 0.5) * 1,
+          size: Math.random() * 3 + 2
+        });
+      }
+      
+      updateDebug('Created ' + particles.length + ' particles - Starting animation');
+      
+      var frameCount = 0;
+      
+      function animate() {
+        frameCount++;
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, width, height);
+        
+        // Debug every 60 frames
+        if (frameCount % 60 === 0) {
+          updateDebug('Frame ' + frameCount + ' - Animation active');
+        }
+        
+        // Draw particles
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.7)';
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          
+          // Update position
+          p.x += p.vx;
+          p.y += p.vy;
+          
+          // Bounce
+          if (p.x <= 0 || p.x >= width) p.vx *= -1;
+          if (p.y <= 0 || p.y >= height) p.vy *= -1;
+          
+          // Draw
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        
+        // Continue animation
+        requestAnimationFrame(animate);
+      }
+      
+      animate();
+    }
+    
+    // Multiple initialization attempts
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initParticles);
+    } else {
+      initParticles();
+    }
+    
+    // Backup initialization
+    window.addEventListener('load', function() {
+      setTimeout(initParticles, 100);
+    });
+    
+  })();
+</script>
+</style>
+
 <script>
   // Vanilla JavaScript particle system - no dependencies
   (function() {

@@ -18,9 +18,9 @@ const currentLang = getLangFromUrl(Astro.url);
   </select>
 </div>
 
-<script>
+<script is:inline>
   document.getElementById('language-select')?.addEventListener('change', (e) => {
-    const select = e.target as HTMLSelectElement;
+    const select = e.target;
     const newLang = select.value;
     const currentPath = window.location.pathname;
     

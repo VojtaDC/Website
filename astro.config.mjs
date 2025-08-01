@@ -6,9 +6,19 @@ export default defineConfig({
   site: 'https://vojtechdeconinck.me',
   output: 'static',
   build: {
-    format: 'directory'
+    format: 'directory',
+    inlineStylesheets: 'auto'
   },
   trailingSlash: 'always',
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: undefined
+        }
+      }
+    }
+  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'nl', 'cs', 'da'],
