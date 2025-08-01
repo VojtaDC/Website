@@ -12,7 +12,7 @@ const t = useTranslations(lang);
   </header>
 
   <!-- Hero Section -->
-  <section class="min-h-screen flex items-center justify-center relative hero-section overflow-hidden theme-transition">
+  <section class="min-h-screen flex items-center justify-center relative hero-section overflow-hidden theme-transition hero-background">
     <!-- Animated Background - only for hero section -->
     <div id="particles-container" class="absolute inset-0 pointer-events-auto z-1"></div>
     
@@ -206,6 +206,15 @@ const t = useTranslations(lang);
   .relative.z-10 * {
     pointer-events: auto;
   }
+  
+  /* Hero background gradients */
+  .hero-background {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  }
+  
+  [data-theme="dark"] .hero-background {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  }
 </style>
 
 <script>
@@ -323,7 +332,13 @@ const t = useTranslations(lang);
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = getCurrentTheme() === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(59, 130, 246, 0.7)';
+        // Make particles much more visible in light mode
+        const theme = getCurrentTheme();
+        if (theme === 'dark') {
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        } else {
+          ctx.fillStyle = 'rgba(30, 64, 175, 0.9)'; // Much darker blue for light mode
+        }
         ctx.fill();
       }
     }
@@ -336,9 +351,13 @@ const t = useTranslations(lang);
     
     console.log(`Created ${particles.length} particles`);
     
-    // Get current theme
+    // Get current theme with better fallback
     function getCurrentTheme() {
-      return document.documentElement.getAttribute('data-theme') || 'light';
+      const documentTheme = document.documentElement.getAttribute('data-theme');
+      const bodyTheme = document.body.getAttribute('data-theme');
+      const theme = documentTheme || bodyTheme || 'light';
+      console.log('Current theme detected:', theme);
+      return theme;
     }
     
     // Animation loop
@@ -362,9 +381,12 @@ const t = useTranslations(lang);
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             const opacity = 0.4 * (1 - distance / 150);
-            ctx.strokeStyle = getCurrentTheme() === 'dark' ? 
-              `rgba(255, 255, 255, ${opacity})` : 
-              `rgba(96, 165, 250, ${opacity})`;
+            const theme = getCurrentTheme();
+            if (theme === 'dark') {
+              ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            } else {
+              ctx.strokeStyle = `rgba(30, 64, 175, ${opacity * 1.5})`; // Darker and more visible
+            }
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -383,9 +405,12 @@ const t = useTranslations(lang);
             ctx.moveTo(mouse.x, mouse.y);
             ctx.lineTo(particle.x, particle.y);
             const opacity = 0.6 * (1 - distance / 200);
-            ctx.strokeStyle = getCurrentTheme() === 'dark' ? 
-              `rgba(255, 255, 255, ${opacity})` : 
-              `rgba(96, 165, 250, ${opacity})`;
+            const theme = getCurrentTheme();
+            if (theme === 'dark') {
+              ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            } else {
+              ctx.strokeStyle = `rgba(30, 64, 175, ${opacity * 1.5})`; // Darker and more visible
+            }
             ctx.lineWidth = 2;
             ctx.stroke();
           }
