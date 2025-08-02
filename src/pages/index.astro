@@ -13,11 +13,6 @@ const t = useTranslations(lang);
 
   <!-- Hero Section -->
   <section class="min-h-screen flex items-center justify-center relative hero-section overflow-hidden theme-transition hero-background">
-    <!-- Test div for debugging -->
-    <div id="debug-info" style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 5px; font-size: 12px; z-index: 1000;">
-      Loading particles v3...
-    </div>
-    
     <!-- Animated Background - only for hero section -->
     <div id="particles-container" class="absolute inset-0 pointer-events-auto z-1"></div>
     
@@ -227,25 +222,10 @@ const t = useTranslations(lang);
   (function() {
     'use strict';
     
-    console.log('Particle script starting v2...');
-    console.log('Document ready state:', document.readyState);
-    console.log('Current timestamp:', new Date().toISOString());
-    
     function initParticles() {
-      const debugDiv = document.getElementById('debug-info');
-      
-      function updateDebug(message) {
-        if (debugDiv) {
-          debugDiv.innerHTML = message;
-          console.log(message);
-        }
-      }
-      
-      updateDebug('Initializing particles...');
-      
       const container = document.getElementById('particles-container');
       if (!container) {
-        updateDebug('ERROR: Particles container not found!');
+        console.log('Particles container not found');
         return;
       }
       
@@ -254,15 +234,11 @@ const t = useTranslations(lang);
         const width = container.offsetWidth;
         const height = container.offsetHeight;
         
-        updateDebug('Checking dimensions: ' + width + 'x' + height);
-        
         if (width === 0 || height === 0) {
-          updateDebug('Container has no dimensions, retrying in 100ms...');
           setTimeout(waitForDimensions, 100);
           return;
         }
         
-        updateDebug('Container has dimensions: ' + width + 'x' + height + ' - Creating canvas...');
         createParticleSystem();
       }
       
@@ -270,28 +246,17 @@ const t = useTranslations(lang);
     }
     
     function createParticleSystem() {
-      const debugDiv = document.getElementById('debug-info');
       const container = document.getElementById('particles-container');
-      
-      function updateDebug(message) {
-        if (debugDiv) {
-          debugDiv.innerHTML = message;
-          console.log(message);
-        }
-      }
-      
-      updateDebug('Container found, creating canvas...');
       
       // Create canvas for particles
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       
       if (!ctx) {
-        updateDebug('ERROR: Canvas context not available!');
+        console.log('Canvas context not available');
         return;
       }
       
-      updateDebug('Canvas created successfully');
       container.appendChild(canvas);
       
       let mouse = { x: null, y: null };
@@ -301,7 +266,6 @@ const t = useTranslations(lang);
       function resizeCanvas() {
         canvas.width = container.offsetWidth;
         canvas.height = container.offsetHeight;
-        updateDebug('Canvas: ' + canvas.width + 'x' + canvas.height + ' | Container: ' + container.offsetWidth + 'x' + container.offsetHeight);
       }
       
       resizeCanvas();
@@ -403,7 +367,7 @@ const t = useTranslations(lang);
       }
       
       console.log('Created ' + particles.length + ' particles');
-      updateDebug('Created ' + particles.length + ' particles - Starting animation...');
+      console.log('Created ' + particles.length + ' particles');
       
       // Get theme function
       function getCurrentTheme() {
@@ -414,17 +378,8 @@ const t = useTranslations(lang);
       }
       
       // Animation loop
-      let frameCount = 0;
       function animate() {
-        frameCount++;
-        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Debug info every 60 frames (about once per second)
-        if (frameCount % 60 === 0) {
-          const theme = getCurrentTheme();
-          updateDebug('Frame ' + frameCount + ' | Canvas: ' + canvas.width + 'x' + canvas.height + ' | Theme: ' + theme + ' | Mouse: ' + (mouse.x !== null ? 'active' : 'none'));
-        }
         
         // Update and draw particles
         for (let i = 0; i < particles.length; i++) {

@@ -13,7 +13,7 @@ const links = [
   { href: getLocalizedPath('', lang), text: t('nav.home') },
   { href: getLocalizedPath('timeline', lang), text: t('nav.timeline') },
   { href: getLocalizedPath('projects', lang), text: t('nav.projects') },
-  { href: getLocalizedPath('cv', lang), text: t('nav.cv') },
+  { href: '/cv/index.html', text: t('nav.cv'), target: '_blank' },
   { href: getLocalizedPath('contact', lang), text: t('nav.contact') },
 ];
 ---
@@ -29,6 +29,7 @@ const links = [
           <li>
             <a 
               href={link.href} 
+              target={link.target || '_self'}
               class="relative font-medium transition-all duration-300 hover:scale-105 group nav-link"
             >
               {link.text}
@@ -64,6 +65,7 @@ const links = [
           <li>
             <a 
               href={link.href} 
+              target={link.target || '_self'}
               class="block py-2 px-4 text-gray-300 hover:text-blue-400 hover:bg-gray-800 rounded-lg transition-all duration-300"
             >
               {link.text}
