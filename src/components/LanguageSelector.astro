@@ -1,8 +1,16 @@
 ---
 import { languages } from '../i18n/ui';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, getLocalizedPath, getPathWithoutLang } from '../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
+const pathWithoutLang = getPathWithoutLang(Astro.url);
+const normalizedPath = pathWithoutLang === '/' ? '' : pathWithoutLang.replace(/^\/|\/$/g, '');
+const localizedPaths = Object.fromEntries(
+  Object.keys(languages).map((lang) => [
+    lang,
+    getLocalizedPath(normalizedPath, lang as keyof typeof languages),
+  ])
+);
 ---
 
 <div class="language-selector relative inline-block">
@@ -11,7 +19,7 @@ const currentLang = getLangFromUrl(Astro.url);
     class="theme-input rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent border transition-all duration-300"
   >
     {Object.entries(languages).map(([lang, name]) => (
-      <option value={lang} selected={lang === currentLang}>
+      <option value={lang} selected={lang === currentLang} data-href={localizedPaths[lang]}>
         {name}
       </option>
     ))}
@@ -20,34 +28,14 @@ const currentLang = getLangFromUrl(Astro.url);
 
 <script is:inline>
   document.getElementById('language-select')?.addEventListener('change', (e) => {
-    const select = e.target;
-    const newLang = select.value;
-    const currentPath = window.location.pathname;
-    
-    // Remove current language from path if present and normalize
-    let pathWithoutLang = currentPath.replace(/^\/(en|nl|cs|da)/, '') || '/';
-    
-    // Ensure path starts with /
-    if (!pathWithoutLang.startsWith('/')) {
-      pathWithoutLang = '/' + pathWithoutLang;
+    const select = e.target as HTMLSelectElement;
+    const target = select.selectedOptions[0];
+    const newPath = target?.dataset.href;
+    const suffix = window.location.search + window.location.hash;
+
+    if (newPath) {
+      window.location.href = `${newPath}${suffix}`;
     }
-    
-    // Remove trailing slash except for root, but keep it for directories
-    if (pathWithoutLang !== '/' && pathWithoutLang.endsWith('/')) {
-      pathWithoutLang = pathWithoutLang.slice(0, -1);
-    }
-    
-    // Add new language prefix (except for default language 'en')
-    let newPath;
-    if (newLang === 'en') {
-      newPath = pathWithoutLang === '/' ? '/' : pathWithoutLang + '/';
-    } else {
-      newPath = pathWithoutLang === '/' ? `/${newLang}/` : `/${newLang}${pathWithoutLang}/`;
-    }
-    
-    // Navigate to new path
-    console.log('Navigating from', currentPath, 'to', newPath);
-    window.location.href = newPath;
   });
 </script>
 

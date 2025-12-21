@@ -13,7 +13,7 @@ const links = [
   { href: getLocalizedPath('', lang), text: t('nav.home') },
   { href: getLocalizedPath('timeline', lang), text: t('nav.timeline') },
   { href: getLocalizedPath('projects', lang), text: t('nav.projects') },
-  { href: '/resume/', text: t('nav.cv'), target: '_blank' },
+  { href: getLocalizedPath('cv', lang), text: t('nav.cv') },
   { href: getLocalizedPath('contact', lang), text: t('nav.contact') },
 ];
 ---
@@ -84,6 +84,7 @@ const links = [
     const themeToggle = document.getElementById('theme-toggle');
     const sunIcon = document.getElementById('sun-icon');
     const moonIcon = document.getElementById('moon-icon');
+    const root = document.documentElement;
     
     // Mobile menu functionality
     if (mobileMenuBtn && mobileMenu) {
@@ -94,112 +95,23 @@ const links = [
     
     // Theme toggle functionality
     if (themeToggle && sunIcon && moonIcon) {
-      // Get current theme from localStorage or default to dark
-      let currentTheme = localStorage.getItem('theme') || 'dark';
-      
-      // Apply theme on page load
-      applyTheme(currentTheme);
-      
+      const themeStorageKey = 'theme';
+      let currentTheme = root.getAttribute('data-theme') || localStorage.getItem(themeStorageKey) || 'light';
+
+      const setTheme = (theme) => {
+        root.setAttribute('data-theme', theme);
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem(themeStorageKey, theme);
+        sunIcon.classList.toggle('hidden', theme !== 'light');
+        moonIcon.classList.toggle('hidden', theme === 'light');
+      };
+
+      setTheme(currentTheme);
+
       themeToggle.addEventListener('click', () => {
         currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        applyTheme(currentTheme);
-        localStorage.setItem('theme', currentTheme);
+        setTheme(currentTheme);
       });
-      
-      function applyTheme(theme) {
-        const body = document.body;
-        const nav = document.querySelector('nav');
-        
-        if (theme === 'light') {
-          // Light theme
-          body.setAttribute('data-theme', 'light');
-          body.className = 'min-h-screen font-Inter antialiased theme-transition bg-gray-50 text-gray-800';
-          
-          if (nav) {
-            nav.className = 'shadow-lg sticky top-0 z-50 backdrop-blur-sm border-b nav-theme bg-white/95 border-gray-200';
-            
-            // Update logo/title
-            const title = nav.querySelector('a[href*="/"]');
-            if (title) {
-              title.className = 'text-2xl font-bold transition-colors duration-300 nav-title text-gray-800 hover:text-blue-600';
-            }
-            
-            // Update nav links
-            const links = nav.querySelectorAll('.nav-link');
-            links.forEach(link => {
-              link.className = 'relative font-medium transition-all duration-300 hover:scale-105 group nav-link text-gray-700 hover:text-blue-600';
-              const span = link.querySelector('span');
-              if (span) {
-                span.className = 'absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full nav-underline bg-blue-600';
-              }
-            });
-            
-            // Update language selector
-            const langSelect = document.getElementById('language-select');
-            if (langSelect) {
-              langSelect.className = 'theme-input rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent border transition-all duration-300 bg-white border-gray-300 text-gray-800';
-            }
-            
-            // Update mobile menu button
-            const mobileBtn = document.getElementById('mobile-menu-btn');
-            if (mobileBtn) {
-              mobileBtn.className = 'md:hidden p-2 rounded-lg hover:bg-gray-100 text-gray-800 transition-colors duration-300';
-            }
-            
-            // Update theme toggle for light mode
-            if (themeToggle) {
-              themeToggle.className = 'relative p-2 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-800 transition-all duration-300 transform hover:scale-105 border border-gray-300 shadow-lg';
-            }
-          }
-          
-          sunIcon.classList.add('hidden');
-          moonIcon.classList.remove('hidden');
-        } else {
-          // Dark theme
-          body.setAttribute('data-theme', 'dark');
-          body.className = 'min-h-screen font-Inter antialiased theme-transition bg-black text-white';
-          
-          if (nav) {
-            nav.className = 'shadow-lg sticky top-0 z-50 backdrop-blur-sm border-b nav-theme bg-black/95 border-gray-800';
-            
-            // Update logo/title
-            const title = nav.querySelector('a[href*="/"]');
-            if (title) {
-              title.className = 'text-2xl font-bold transition-colors duration-300 nav-title text-white hover:text-blue-400';
-            }
-            
-            // Update nav links
-            const links = nav.querySelectorAll('.nav-link');
-            links.forEach(link => {
-              link.className = 'relative font-medium transition-all duration-300 hover:scale-105 group nav-link text-gray-300 hover:text-blue-400';
-              const span = link.querySelector('span');
-              if (span) {
-                span.className = 'absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full nav-underline bg-blue-400';
-              }
-            });
-            
-            // Update language selector
-            const langSelect = document.getElementById('language-select');
-            if (langSelect) {
-              langSelect.className = 'theme-input rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-400 focus:border-transparent border transition-all duration-300 bg-gray-800 border-gray-600 text-white';
-            }
-            
-            // Update mobile menu button
-            const mobileBtn = document.getElementById('mobile-menu-btn');
-            if (mobileBtn) {
-              mobileBtn.className = 'md:hidden p-2 rounded-lg hover:bg-gray-800 text-white transition-colors duration-300';
-            }
-            
-            // Update theme toggle for dark mode
-            if (themeToggle) {
-              themeToggle.className = 'relative p-2 rounded-lg bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white transition-all duration-300 transform hover:scale-105 border border-gray-600 shadow-lg';
-            }
-          }
-          
-          sunIcon.classList.remove('hidden');
-          moonIcon.classList.add('hidden');
-        }
-      }
     }
   });
 </script>
