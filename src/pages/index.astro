@@ -209,11 +209,7 @@ const t = useTranslations(lang);
   
   /* Hero background gradients */
   .hero-background {
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  }
-  
-  [data-theme="dark"] .hero-background {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: var(--hero-gradient);
   }
 </style>
 
@@ -349,14 +345,9 @@ const t = useTranslations(lang);
       Particle.prototype.draw = function() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        
-        // Get theme
-        const theme = getCurrentTheme();
-        if (theme === 'dark') {
-          ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-        } else {
-          ctx.fillStyle = 'rgba(30, 64, 175, 0.9)';
-        }
+
+        const colors = getParticleColors();
+        ctx.fillStyle = withAlpha(colors.dot, 0.9);
         ctx.fill();
       };
       
@@ -373,6 +364,62 @@ const t = useTranslations(lang);
         const bodyTheme = document.body.getAttribute('data-theme');
         const theme = documentTheme || bodyTheme || 'light';
         return theme;
+      }
+
+      let cachedTheme = null;
+      let cachedColors = null;
+
+      function getParticleColors() {
+        const theme = getCurrentTheme();
+        if (!cachedColors || cachedTheme !== theme) {
+          const rootStyles = getComputedStyle(document.documentElement);
+          cachedColors = {
+            dot: rootStyles.getPropertyValue('--particles-color').trim() || 'rgb(30, 64, 175)',
+            line: rootStyles.getPropertyValue('--particles-lines').trim() || 'rgb(59, 130, 246)',
+          };
+          cachedTheme = theme;
+        }
+        return cachedColors;
+      }
+
+      function withAlpha(color, alpha) {
+        const parsed = parseColor(color);
+        if (!parsed) return color;
+        return `rgba(${parsed.r}, ${parsed.g}, ${parsed.b}, ${alpha})`;
+      }
+
+      function parseColor(color) {
+        const trimmed = color.trim();
+        if (!trimmed) return null;
+        if (trimmed.startsWith('#')) {
+          return parseHexColor(trimmed);
+        }
+        const numbers = trimmed.match(/[\d.]+/g);
+        if (!numbers || numbers.length < 3) return null;
+        return {
+          r: Number(numbers[0]),
+          g: Number(numbers[1]),
+          b: Number(numbers[2]),
+        };
+      }
+
+      function parseHexColor(color) {
+        const hex = color.replace('#', '').trim();
+        if (hex.length === 3) {
+          return {
+            r: parseInt(hex[0] + hex[0], 16),
+            g: parseInt(hex[1] + hex[1], 16),
+            b: parseInt(hex[2] + hex[2], 16),
+          };
+        }
+        if (hex.length === 6) {
+          return {
+            r: parseInt(hex.slice(0, 2), 16),
+            g: parseInt(hex.slice(2, 4), 16),
+            b: parseInt(hex.slice(4, 6), 16),
+          };
+        }
+        return null;
       }
       
       // Animation loop
@@ -398,11 +445,9 @@ const t = useTranslations(lang);
               ctx.lineTo(particles[j].x, particles[j].y);
               const opacity = 0.4 * (1 - distance / 150);
               const theme = getCurrentTheme();
-              if (theme === 'dark') {
-                ctx.strokeStyle = 'rgba(255, 255, 255, ' + opacity + ')';
-              } else {
-                ctx.strokeStyle = 'rgba(30, 64, 175, ' + (opacity * 1.5) + ')';
-              }
+              const colors = getParticleColors();
+              const lineOpacity = theme === 'dark' ? opacity : opacity * 1.5;
+              ctx.strokeStyle = withAlpha(colors.line, Math.min(1, lineOpacity));
               ctx.lineWidth = 1;
               ctx.stroke();
             }
@@ -422,11 +467,9 @@ const t = useTranslations(lang);
               ctx.lineTo(particles[i].x, particles[i].y);
               const opacity = 0.6 * (1 - distance / 200);
               const theme = getCurrentTheme();
-              if (theme === 'dark') {
-                ctx.strokeStyle = 'rgba(255, 255, 255, ' + opacity + ')';
-              } else {
-                ctx.strokeStyle = 'rgba(30, 64, 175, ' + (opacity * 1.5) + ')';
-              }
+              const colors = getParticleColors();
+              const lineOpacity = theme === 'dark' ? opacity : opacity * 1.5;
+              ctx.strokeStyle = withAlpha(colors.line, Math.min(1, lineOpacity));
               ctx.lineWidth = 2;
               ctx.stroke();
             }

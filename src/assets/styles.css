@@ -27,6 +27,7 @@
   --hero-subtitle: theme('colors.gray.600');
   --particles-color: theme('colors.blue.600');
   --particles-lines: theme('colors.blue.400');
+  --hero-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
   --section-bg: theme('colors.gray.50');
 }
 
@@ -52,8 +53,9 @@
   --hero-bg: theme('colors.black');
   --hero-text: theme('colors.white');
   --hero-subtitle: theme('colors.gray.300');
-  --particles-color: theme('colors.white');
-  --particles-lines: theme('colors.white');
+  --particles-color: theme('colors.blue.300');
+  --particles-lines: theme('colors.blue.400');
+  --hero-gradient: linear-gradient(135deg, #0f172a 0%, #111827 100%);
   --section-bg: theme('colors.black');
 }
 
