@@ -217,13 +217,15 @@ const t = useTranslations(lang);
   // Vanilla JavaScript particle system - no dependencies
   (function() {
     'use strict';
+
+    let particlesInitStarted = false;
+    let particlesInitialized = false;
     
     function initParticles() {
       const container = document.getElementById('particles-container');
-      if (!container) {
-        console.log('Particles container not found');
-        return;
-      }
+      if (!container || particlesInitStarted) return;
+
+      particlesInitStarted = true;
       
       // Wait for container to have dimensions
       function waitForDimensions() {
@@ -243,17 +245,24 @@ const t = useTranslations(lang);
     
     function createParticleSystem() {
       const container = document.getElementById('particles-container');
+      if (!container || particlesInitialized) return;
       
       // Create canvas for particles
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       
       if (!ctx) {
-        console.log('Canvas context not available');
+        particlesInitStarted = false;
         return;
       }
-      
+
+      const existingCanvas = container.querySelector('canvas');
+      if (existingCanvas) {
+        existingCanvas.remove();
+      }
+
       container.appendChild(canvas);
+      particlesInitialized = true;
       
       let mouse = { x: null, y: null };
       let mouseVelocity = { x: 0, y: 0 };
@@ -486,17 +495,11 @@ const t = useTranslations(lang);
       animate();
     }
     
-    // Multiple initialization attempts
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initParticles);
+      document.addEventListener('DOMContentLoaded', initParticles, { once: true });
     } else {
       initParticles();
     }
-    
-    // Backup initialization
-    window.addEventListener('load', function() {
-      setTimeout(initParticles, 100);
-    });
     
   })();
 </script>

@@ -11,8 +11,8 @@ const projects = [
     id: 1,
     titleKey: "projects.tutoring.title",
     descriptionKey: "projects.tutoring.description",
-    image: "/images/project-tutoring.jpg",
-    logo: "/images/tutoring-logo.png",
+    image: null,
+    logo: null,
     technologies: [
       "projects.tech.businessManagement",
       "projects.tech.education",
@@ -36,7 +36,7 @@ const projects = [
     id: 2,
     titleKey: "projects.thesis.title", 
     descriptionKey: "projects.thesis.description",
-    image: "/images/project-thesis.jpg",
+    image: null,
     technologies: [
       "projects.tech.civilEngineering",
       "projects.tech.research",
@@ -61,7 +61,7 @@ const projects = [
     id: 3,
     titleKey: "projects.basketball.title",
     descriptionKey: "projects.basketball.description", 
-    image: "/images/project-basketball.jpg",
+    image: null,
     technologies: [
       "projects.tech.leadership",
       "projects.tech.sportsManagement",
@@ -84,7 +84,7 @@ const projects = [
     id: 4,
     titleKey: "projects.exchange.title",
     descriptionKey: "projects.exchange.description",
-    image: "/images/project-exchange.jpg", 
+    image: null, 
     technologies: [
       "projects.tech.internationalCollaboration",
       "projects.tech.electricalEngineering",
@@ -146,12 +146,14 @@ const projects = [
             >
               <!-- Project Image -->
               <div class="relative h-48 bg-gradient-to-br from-blue-100 to-indigo-200 overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={t(project.titleKey)}
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  onerror="this.style.display='none'"
-                />
+                {project.image && (
+                  <img 
+                    src={project.image} 
+                    alt={t(project.titleKey)}
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    onerror="this.style.display='none'"
+                  />
+                )}
                 <!-- Fallback gradient with icon -->
                 <div class="absolute inset-0 flex items-center justify-center text-white">
                   <div class="text-center">
