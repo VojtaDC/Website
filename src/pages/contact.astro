@@ -51,7 +51,7 @@ const t = useTranslations(lang);
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-semibold text-white mb-1">{t('contact.info.phone.title')}</h3>
+                  <h3 class="font-semibold mb-1 theme-text">{t('contact.info.phone.title')}</h3>
                   <a href="tel:+32456013017" class="text-green-400 hover:text-green-300 transition-colors duration-300">
                     +32 (0)456 01 30 17
                   </a>
@@ -67,8 +67,8 @@ const t = useTranslations(lang);
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-semibold text-white mb-1">{t('contact.info.location.title')}</h3>
-                  <p class="text-gray-300">
+                  <h3 class="font-semibold mb-1 theme-text">{t('contact.info.location.title')}</h3>
+                  <p class="theme-text-secondary">
                     {t('contact.info.location.body').split('\n').map((line) => (
                       <span class="block">{line}</span>
                     ))}
@@ -84,8 +84,8 @@ const t = useTranslations(lang);
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-semibold text-white mb-1">{t('contact.info.services.title')}</h3>
-                  <p class="text-gray-300">
+                  <h3 class="font-semibold mb-1 theme-text">{t('contact.info.services.title')}</h3>
+                  <p class="theme-text-secondary">
                     <span class="block">{t('contact.info.services.tutoring')}</span>
                     <span class="block">{t('contact.info.services.engineering')}</span>
                     <span class="block">{t('contact.info.services.coaching')}</span>
@@ -96,7 +96,7 @@ const t = useTranslations(lang);
 
             <!-- Social Links & Messaging Apps -->
             <div class="mt-12">
-              <h3 class="text-xl font-bold text-white mb-6">{t('contact.social.title')}</h3>
+              <h3 class="text-xl font-bold mb-6 theme-text">{t('contact.social.title')}</h3>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <!-- WhatsApp -->
                 <a href="https://wa.me/32456013017" target="_blank" 

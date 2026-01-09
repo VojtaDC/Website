@@ -139,6 +139,7 @@ export const ui = {
     // Projects page
     'projects.title': 'My Projects',
     'projects.subtitle': 'Discover my passion for teaching, education, sports coaching and excellence in engineering work.',
+    'projects.comingSoon': 'Coming soon..',
     'projects.tutoring.title': 'Private Tutoring Business',
     'projects.tutoring.description': 'Professional tutoring services helping students excel across multiple subjects including mathematics, physics, chemistry and languages. Specialized in personalized learning methods and exam preparation.',
     'projects.thesis.title': 'Civil Engineering Bachelor Thesis',
@@ -355,6 +356,7 @@ export const ui = {
     // Projects page
     'projects.title': 'Mijn Projecten',
     'projects.subtitle': 'Een showcase van mijn werk en prestaties',
+    'projects.comingSoon': 'Coming soon..',
     'projects.tutoring.title': 'Privé Bijlesbedrijf',
     'projects.tutoring.description': 'Professionele bijlesdiensten die studenten helpen excelleren in meerdere vakken waaronder wiskunde, natuurkunde, scheikunde en talen. Gespecialiseerd in gepersonaliseerde leermethoden en examenvoorbereiding.',
     'projects.thesis.title': 'Civiele Techniek Bachelor Scriptie',
@@ -573,6 +575,7 @@ export const ui = {
     // Projects page
     'projects.title': 'Mé Projekty',
     'projects.subtitle': 'Ukázka mé práce a úspěchů',
+    'projects.comingSoon': 'Coming soon..',
     'projects.tutoring.title': 'Soukromé Doučovací Podnikání',
     'projects.tutoring.description': 'Profesionální doučovací služby pomáhající studentům vyniknout v několika předmětech včetně matematiky, fyziky, chemie a jazyků. Specializace na personalizované metody učení a přípravu na zkoušky.',
     'projects.thesis.title': 'Bakalářská Práce Stavební Inženýrství',
@@ -791,6 +794,7 @@ export const ui = {
     // Projects page
     'projects.title': 'Mine Projekter',
     'projects.subtitle': 'Et showcase af mit arbejde og præstationer',
+    'projects.comingSoon': 'Coming soon..',
     'projects.tutoring.title': 'Privat Undervisningsvirksomhed',
     'projects.tutoring.description': 'Professionelle undervisningstjenester der hjælper studerende med at excellere på tværs af flere fag inklusiv matematik, fysik, kemi og sprog. Specialiseret i personlige læringsmetoder og eksamensforberedelse.',
     'projects.thesis.title': 'Civilingeniør Bachelor Afhandling',

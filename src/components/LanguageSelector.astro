@@ -27,16 +27,20 @@ const localizedPaths = Object.fromEntries(
 </div>
 
 <script is:inline>
-  document.getElementById('language-select')?.addEventListener('change', (e) => {
-    const select = e.target as HTMLSelectElement;
-    const target = select.selectedOptions[0];
-    const newPath = target?.dataset.href;
-    const suffix = window.location.search + window.location.hash;
+  const languageSelect = document.getElementById('language-select');
+  if (languageSelect) {
+    languageSelect.addEventListener('change', (event) => {
+      const target = event.target;
+      if (!(target instanceof HTMLSelectElement)) return;
+      const option = target.selectedOptions[0];
+      const newPath = option?.dataset?.href;
+      const suffix = window.location.search + window.location.hash;
 
-    if (newPath) {
-      window.location.href = `${newPath}${suffix}`;
-    }
-  });
+      if (newPath) {
+        window.location.href = `${newPath}${suffix}`;
+      }
+    });
+  }
 </script>
 
 <style>
