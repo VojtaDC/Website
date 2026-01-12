@@ -138,7 +138,7 @@ export const ui = {
     
     // Projects page
     'projects.title': 'My Projects',
-    'projects.subtitle': 'A showcase of my work and achievements',
+    'projects.subtitle': 'A showcase of my engineering projects and achievements',
     'projects.overview': 'Overview',
     'projects.whatILearned': 'What I learned',
     'projects.technology': 'Technology',

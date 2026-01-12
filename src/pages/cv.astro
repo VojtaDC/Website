@@ -18,8 +18,10 @@ const t = useTranslations(lang);
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <button 
-            onclick="toggleCVWindow()"
-            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            type="button"
+            class="js-cv-toggle inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+            aria-controls="cvWindow"
+            aria-expanded="false"
           >
             <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -211,8 +213,10 @@ const t = useTranslations(lang);
           <div class="text-center" data-aos="fade-up" data-aos-delay="600">
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button 
-                onclick="toggleCVWindow()"
-                class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                type="button"
+                class="js-cv-toggle inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                aria-controls="cvWindow"
+                aria-expanded="false"
               >
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -239,32 +243,40 @@ const t = useTranslations(lang);
   </div>
 
   <script>
-    function toggleCVWindow() {
+    document.addEventListener('DOMContentLoaded', () => {
       const cvWindow = document.getElementById('cvWindow');
-      if (cvWindow.classList.contains('hidden')) {
-        cvWindow.classList.remove('hidden');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-      } else {
-        cvWindow.classList.add('hidden');
-        document.body.style.overflow = 'auto'; // Restore scrolling
-      }
-    }
+      const toggleButtons = document.querySelectorAll('.js-cv-toggle');
 
-    // Close modal when clicking outside
-    document.getElementById('cvWindow').addEventListener('click', function(e) {
-      if (e.target === this) {
-        toggleCVWindow();
-      }
-    });
+      if (!cvWindow || toggleButtons.length === 0) return;
 
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        const cvWindow = document.getElementById('cvWindow');
-        if (!cvWindow.classList.contains('hidden')) {
+      const setExpanded = (expanded) => {
+        toggleButtons.forEach((button) => {
+          button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        });
+      };
+
+      const toggleCVWindow = () => {
+        const isHidden = cvWindow.classList.contains('hidden');
+        cvWindow.classList.toggle('hidden', !isHidden);
+        document.body.style.overflow = isHidden ? 'hidden' : 'auto';
+        setExpanded(isHidden);
+      };
+
+      toggleButtons.forEach((button) => {
+        button.addEventListener('click', toggleCVWindow);
+      });
+
+      cvWindow.addEventListener('click', (e) => {
+        if (e.target === cvWindow) {
           toggleCVWindow();
         }
-      }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !cvWindow.classList.contains('hidden')) {
+          toggleCVWindow();
+        }
+      });
     });
   </script>
 </BaseLayout>
