@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { projects } from '../../data/projects';
+import { getLangFromUrl, useTranslations, getLocalizedPath } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = projects.find((item) => item.slug === slug);
+
+if (!project) {
+  throw new Error(`Project not found: ${slug}`);
+}
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const backHref = getLocalizedPath('projects', lang);
+const statusBadgeClass =
+  project.status === 'Coming soon'
+    ? 'bg-amber-100 text-amber-800'
+    : 'bg-emerald-100 text-emerald-800';
+const hasLinks = project.links && project.links.length > 0;
+---
+
+<BaseLayout>
+  <div class="section-bg theme-transition">
+    <section class="py-16 md:py-20 px-6" data-aos="fade-up">
+      <div class="container mx-auto">
+        <a
+          href={backHref}
+          class="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+        >
+          <span class="mr-2">←</span>
+          {t('projects.backToProjects')}
+        </a>
+
+        <div class="mt-8 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] items-center">
+          <div class="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-xl">
+            <img
+              src={project.coverImage}
+              alt={`${project.title} cover`}
+              class="h-full w-full object-cover"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+            />
+            <div class="absolute inset-0 hidden items-center justify-center bg-slate-200 text-slate-500">
+              <span class="text-xs uppercase tracking-[0.2em]">Image TBD</span>
+            </div>
+          </div>
+
+          <div>
+            {(project.status || project.date) && (
+              <div class="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-slate-500">
+                {project.status && (
+                  <span class={`rounded-full px-3 py-1 font-semibold ${statusBadgeClass}`}>
+                    {project.status}
+                  </span>
+                )}
+                {project.date && <span>{project.date}</span>}
+              </div>
+            )}
+            <h1 class="mt-4 text-4xl md:text-5xl font-bold theme-text">
+              {project.title}
+            </h1>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {project.tags.map((tag) => (
+                <span class="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pb-20 px-6">
+      <div class="container mx-auto grid gap-8 lg:grid-cols-3">
+        <div class="lg:col-span-2 space-y-8">
+          <div class="theme-card theme-transition rounded-2xl border p-6 shadow-sm">
+            <h2 class="text-2xl font-semibold theme-text">{t('projects.overview')}</h2>
+            <p class="mt-3 text-base theme-text-secondary leading-relaxed">
+              {project.shortDescription}
+            </p>
+          </div>
+
+          <div class="theme-card theme-transition rounded-2xl border p-6 shadow-sm">
+            <h2 class="text-2xl font-semibold theme-text">{t('projects.whatILearned')}</h2>
+            <ul class="mt-4 space-y-2 text-sm theme-text-secondary">
+              {project.learned.map((item) => (
+                <li class="flex items-start gap-2">
+                  <span class="mt-1 text-blue-500">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <aside class="space-y-8">
+          <div class="theme-card theme-transition rounded-2xl border p-6 shadow-sm">
+            <h2 class="text-2xl font-semibold theme-text">{t('projects.technology')}</h2>
+            <div class="mt-4 flex flex-wrap gap-2">
+              {project.tags.map((tag) => (
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {hasLinks && (
+            <div class="theme-card theme-transition rounded-2xl border p-6 shadow-sm">
+              <h2 class="text-2xl font-semibold theme-text">{t('projects.links')}</h2>
+              <div class="mt-4 flex flex-col gap-3">
+                {project.links?.map((link) => (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </aside>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

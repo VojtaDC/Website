@@ -1,0 +1,17 @@
+---
+import ProjectPage from '../../projects/[slug].astro';
+import { getStaticPaths as getLangStaticPaths } from '../../../i18n/utils';
+import { projects } from '../../../data/projects';
+
+export function getStaticPaths() {
+  const langPaths = getLangStaticPaths();
+
+  return langPaths.flatMap(({ params }) =>
+    projects.map((project) => ({
+      params: { lang: params.lang, slug: project.slug },
+    }))
+  );
+}
+---
+
+<ProjectPage />

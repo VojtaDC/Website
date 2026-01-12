@@ -1,0 +1,80 @@
+---
+import { getLocalizedPath } from '../i18n/utils';
+import type { Project } from '../data/projects';
+
+type Lang = keyof typeof import('../i18n/ui').ui;
+
+interface Props {
+  project: Project;
+  lang: Lang;
+  learnedLabel: string;
+  viewProjectLabel: string;
+  index?: number;
+}
+
+const { project, lang, learnedLabel, viewProjectLabel, index = 0 } = Astro.props;
+const learnedPreview = project.learned.slice(0, 4);
+const extraLearnedCount = project.learned.length - learnedPreview.length;
+const href = getLocalizedPath(`projects/${project.slug}`, lang);
+const delay = index * 100;
+---
+
+<a
+  href={href}
+  class="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-lg transition-all duration-300 ease-out transform-gpu hover:scale-[1.02] hover:shadow-2xl focus-visible:scale-[1.02] focus-visible:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white md:flex-row"
+  data-aos="fade-up"
+  data-aos-delay={delay}
+  aria-label={`${viewProjectLabel}: ${project.title}`}
+  onkeydown="if (event.key === ' ') { event.preventDefault(); this.click(); }"
+>
+  <div class="relative w-full md:w-5/12">
+    <img
+      src={project.coverImage}
+      alt={`${project.title} cover`}
+      loading="lazy"
+      class="h-56 w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105 md:h-full"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+    />
+    <div class="absolute inset-0 hidden items-center justify-center bg-slate-200 text-slate-500">
+      <span class="text-xs uppercase tracking-[0.2em]">Image TBD</span>
+    </div>
+  </div>
+
+  <div class="flex flex-1 flex-col justify-between bg-slate-900 p-6 text-white">
+    <div>
+      {(project.status || project.date) && (
+        <div class="mb-3 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-slate-400">
+          {project.status && <span>{project.status}</span>}
+          {project.date && <span>{project.date}</span>}
+        </div>
+      )}
+      <h3 class="text-2xl font-semibold leading-tight">{project.title}</h3>
+      <p class="mt-3 text-sm text-slate-200">{project.shortDescription}</p>
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-2">
+      {project.tags.map((tag) => (
+        <span class="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-slate-100">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <div class="mt-6 text-sm font-semibold text-blue-200">{viewProjectLabel} →</div>
+  </div>
+
+  <div class="pointer-events-none absolute inset-0 flex flex-col justify-center gap-4 bg-slate-950/80 px-6 py-8 text-slate-100 opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0">
+    <div class="text-xs uppercase tracking-[0.35em] text-blue-200">{learnedLabel}</div>
+    <ul class="space-y-2 text-sm">
+      {learnedPreview.map((item) => (
+        <li class="flex items-start gap-2">
+          <span class="mt-1 text-blue-300">•</span>
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
+    {extraLearnedCount > 0 && (
+      <div class="text-xs text-slate-300">+{extraLearnedCount} more</div>
+    )}
+  </div>
+</a>
