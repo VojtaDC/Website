@@ -8,6 +8,7 @@ export type Project = {
   title: string;
   tags: string[];
   shortDescription: string;
+  overview?: string;
   learned: string[];
   coverImage: string;
   date?: string;
@@ -63,6 +64,78 @@ export const projects: Project[] = [
     ],
     coverImage: placeholderCover,
     status: 'Completed',
+  },
+  {
+    slug: 'dtu-mlops-project',
+    title: 'DTU MLOps Project',
+    tags: ['MLOps', 'PyTorch', 'Docker', 'CI/CD', 'FastAPI'],
+    shortDescription:
+      'Course project applying end-to-end MLOps practices (reproducibility, CI, Docker, deployment, monitoring) to a machine-learning pipeline, with the tabular CNN baseline being replaced by an MLP.',
+    overview:
+      'Built on the DTU MLOps cookiecutter template with a structured repo (configs, data, dockerfiles, tests, reports, docs). Focused on reproducibility, automated testing, containerized training/inference, and a FastAPI service while migrating the tabular model from CNN to MLP.',
+    learned: [
+      'Structured an MLOps repository with configs, data splits, tests, reports, and documentation',
+      'Set up reproducible environments and dependency management for ML workflows',
+      'Versioned data and experiments for traceability and rollback',
+      'Built CI pipelines for testing, linting, and coverage',
+      'Containerized training and API services with Docker',
+      'Designed an inference API with FastAPI for deployment-ready integration',
+      'Improved model fit for tabular data by moving from CNN to MLP',
+    ],
+    coverImage: placeholderCover,
+  },
+  {
+    slug: 'electric-kart-build',
+    title: 'De Elektrische Kart',
+    tags: ['EV', 'Power Electronics', 'Battery', 'Motor', 'Arduino'],
+    shortDescription:
+      'Designed and built an electric kart, covering the drivetrain, power electronics, wiring, and testing.',
+    overview:
+      'Team project focused on sizing the motor, inverter, and battery system, validating performance through simulations and test runs, and documenting the full build process.',
+    learned: [
+      'Powertrain sizing and integration (motor, inverter, transmission)',
+      'Battery selection and state-of-charge measurement (LEM HTFS 400-P)',
+      'Wiring diagrams, harness routing, and cable list planning',
+      'Performance simulation for speed, acceleration, and energy use',
+      'Testing methodology including bench and outdoor runs',
+      'Team coordination, documentation, and safety checks',
+    ],
+    coverImage: placeholderCover,
+  },
+  {
+    slug: 'battery-development-project',
+    title: 'Project Leefmilieutechnologie - Batterij',
+    tags: ['Batteries', 'Electrochemistry', 'NiZn', 'CuZn', 'Lab Testing'],
+    shortDescription:
+      'Designed and tested copper-zinc and nickel-zinc batteries with a focus on electrolyte selection and performance evaluation.',
+    overview:
+      'Researched commercial battery chemistries, selected CuZn and NiZn designs, and iterated on electrolyte formulations and electrode preparation to improve performance.',
+    learned: [
+      'Battery fundamentals: operation, charging, and key performance metrics',
+      'Comparative analysis of commercial chemistries (NiMH, ZnC)',
+      'Electrolyte screening and sensitivity testing',
+      'Electrode preparation via electrolysis (NiOOH, Ni(OH)2)',
+      'Circuit design, switching, and prototype assembly',
+      'Lab validation, measurement, and conclusion reporting',
+    ],
+    coverImage: placeholderCover,
+  },
+  {
+    slug: 'maze-solver-arduino',
+    title: 'Maze Solver (Python & Arduino)',
+    tags: ['Computer Vision', 'Python', 'Arduino', 'Robotics', 'BFS'],
+    shortDescription:
+      'Used computer vision to detect a maze, compute a shortest path with BFS, and steer a physical marble maze via Arduino-controlled servos.',
+    overview:
+      'A camera feed is processed to extract the maze layout, then a breadth-first search determines a path while PID control translates it into tilt commands sent over serial to the Arduino.',
+    learned: [
+      'Perspective correction and maze extraction from a live camera feed',
+      'Breadth-first search pathfinding for shortest routes',
+      'Serial communication between Python and Arduino',
+      'PID tuning for stable marble control',
+      'Robust detection via thresholding and morphological operations',
+    ],
+    coverImage: placeholderCover,
   },
   {
     slug: 'buck-boost-pcb',

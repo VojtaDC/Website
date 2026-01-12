@@ -77,12 +77,15 @@ const year = new Date().getFullYear();
       })();
 
       document.addEventListener('DOMContentLoaded', () => {
-        AOS.init({
-          duration: 800,
-          easing: 'ease-in-out',
-          once: true,
-          offset: 100
-        });
+        if (typeof AOS !== 'undefined') {
+          AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+          });
+          document.documentElement.classList.add('aos-enabled');
+        }
       });
     </script>
   </body>

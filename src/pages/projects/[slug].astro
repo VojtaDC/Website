@@ -85,6 +85,11 @@ const hasLinks = project.links && project.links.length > 0;
             <p class="mt-3 text-base theme-text-secondary leading-relaxed">
               {project.shortDescription}
             </p>
+            {project.overview && (
+              <p class="mt-4 text-base theme-text-secondary leading-relaxed">
+                {project.overview}
+              </p>
+            )}
           </div>
 
           <div class="theme-card theme-transition rounded-2xl border p-6 shadow-sm">
