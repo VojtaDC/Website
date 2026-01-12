@@ -24,7 +24,7 @@ export const ui = {
     
     // Home page
     'home.title': 'Welcome to My Portfolio',
-    'home.subtitle': 'Civil Engineer & Software Developer',
+    'home.subtitle': 'Electrical Engineer & Software Developer',
     'home.description': 'Civil Engineering graduate and aspiring Electrical Engineer, passionate about innovation, education, and making a positive impact.',
     'home.journey': 'View My Journey',
     'home.projects': 'See Projects',
@@ -247,7 +247,7 @@ export const ui = {
     
     // Home page
     'home.title': 'Welkom bij Mijn Portfolio',
-    'home.subtitle': 'Civiel Ingenieur & Software Ontwikkelaar',
+    'home.subtitle': 'Electrical Engineer & Software Developer',
     'home.description': 'Afgestudeerd Civiel Ingenieur en aspirant Elektrotechnisch Ingenieur, gepassioneerd door innovatie, onderwijs en positieve impact maken.',
     'home.journey': 'Bekijk Mijn Reis',
     'home.projects': 'Bekijk Projecten',
@@ -472,7 +472,7 @@ export const ui = {
     
     // Home page
     'home.title': 'Vítejte v Mém Portfoliu',
-    'home.subtitle': 'Stavební Inženýr & Software Developer',
+    'home.subtitle': 'Electrical Engineer & Software Developer',
     'home.description': 'Absolvent stavebního inženýrství a budoucí elektrotechnický inženýr, nadšený pro inovace, vzdělávání a vytváření pozitivního dopadu.',
     'home.journey': 'Zobrazit Mou Cestu',
     'home.projects': 'Zobrazit Projekty',
@@ -697,7 +697,7 @@ export const ui = {
     
     // Home page
     'home.title': 'Velkommen til Mit Portfolio',
-    'home.subtitle': 'Civilingeniør & Software Udvikler',
+    'home.subtitle': 'Electrical Engineer & Software Developer',
     'home.description': 'Civilingeniør kandidat og kommende el-ingeniør, passioneret omkring innovation, uddannelse og skabelse af positiv indvirkning.',
     'home.journey': 'Se Min Rejse',
     'home.projects': 'Se Projekter',
