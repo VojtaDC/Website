@@ -1,6 +1,7 @@
 export type ProjectLink = {
   label: string;
   url: string;
+  download?: string;
 };
 
 export type Project = {
@@ -59,6 +60,13 @@ export const projects: Project[] = [
     ],
     coverImage: AssemblyCover,
     status: 'Completed',
+    links: [
+      {
+        label: 'Download',
+        url: '/documents/assembly-x86-plants-vs-zombies.pdf',
+        download: 'assembly-x86-plants-vs-zombies.pdf',
+      },
+    ],
   },
 
   {
@@ -77,6 +85,13 @@ export const projects: Project[] = [
     ],
     coverImage: FilterCover,
     status: 'Completed',
+    links: [
+      {
+        label: 'Download',
+        url: '/documents/filter-design.pdf',
+        download: 'filter-design.pdf',
+      },
+    ],
   },
   {
     slug: 'maze-solver-arduino',
@@ -166,6 +181,13 @@ export const projects: Project[] = [
     ],
     coverImage: JupiterHorizonCover,
     status: 'Completed',
+    links: [
+      {
+        label: 'Download',
+        url: '/documents/image-analysis-jupiter.pdf',
+        download: 'image-analysis-jupiter.pdf',
+      },
+    ],
   },
   {
     slug: 'electric-kart-build',
@@ -204,6 +226,13 @@ export const projects: Project[] = [
     ],
     coverImage: BatteryCover,
     status: 'Completed',
+    links: [
+      {
+        label: 'Download',
+        url: '/documents/battery-design.pdf',
+        download: 'battery-design.pdf',
+      },
+    ],
   },
   {
     slug: '5p4ghz-integrated-small-signal-amplifier',

@@ -23,7 +23,10 @@ const statusBadgeClass =
   project.status === 'Coming soon'
     ? 'bg-amber-100 text-amber-800'
     : 'bg-emerald-100 text-emerald-800';
-const hasLinks = project.links && project.links.length > 0;
+const downloadLinks = project.links?.filter((link) => link.download) ?? [];
+const otherLinks = project.links?.filter((link) => !link.download) ?? [];
+const primaryDownload = downloadLinks[0];
+const hasOtherLinks = otherLinks.length > 0;
 ---
 
 <BaseLayout>
@@ -72,6 +75,20 @@ const hasLinks = project.links && project.links.length > 0;
                 </span>
               ))}
             </div>
+            {primaryDownload && (
+              <div class="mt-6">
+                <a
+                  href={primaryDownload.url}
+                  download={primaryDownload.download}
+                  class="btn-download"
+                >
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v10m0 0l-4-4m4 4l4-4M4 18h16"></path>
+                  </svg>
+                  {primaryDownload.label}
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -117,11 +134,11 @@ const hasLinks = project.links && project.links.length > 0;
             </div>
           </div>
 
-          {hasLinks && (
+          {hasOtherLinks && (
             <div class="theme-card theme-transition rounded-2xl border p-6 shadow-sm">
               <h2 class="text-2xl font-semibold theme-text">{t('projects.links')}</h2>
               <div class="mt-4 flex flex-col gap-3">
-                {project.links?.map((link) => (
+                {otherLinks.map((link) => (
                   <a
                     href={link.url}
                     target="_blank"
