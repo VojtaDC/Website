@@ -276,24 +276,34 @@ const t = useTranslations(lang);
       resizeCanvas();
       window.addEventListener('resize', resizeCanvas);
       
-      // Mouse tracking
-      canvas.addEventListener('mousemove', function(e) {
-        const rect = canvas.getBoundingClientRect();
-        const newMouse = {
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        };
-        
-        if (mouse.x !== null && mouse.y !== null) {
-          mouseVelocity.x = newMouse.x - mouse.x;
-          mouseVelocity.y = newMouse.y - mouse.y;
+      // Mouse tracking (use window to keep interaction when hovering text)
+      function updateMousePosition(e) {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        if (x < 0 || y < 0 || x > rect.width || y > rect.height) {
+          mouse.x = null;
+          mouse.y = null;
+          mouseVelocity.x = 0;
+          mouseVelocity.y = 0;
+          return;
         }
-        
-        mouse.x = newMouse.x;
-        mouse.y = newMouse.y;
-      });
-      
-      canvas.addEventListener('mouseleave', function() {
+
+        if (mouse.x !== null && mouse.y !== null) {
+          mouseVelocity.x = x - mouse.x;
+          mouseVelocity.y = y - mouse.y;
+        } else {
+          mouseVelocity.x = 0;
+          mouseVelocity.y = 0;
+        }
+
+        mouse.x = x;
+        mouse.y = y;
+      }
+
+      window.addEventListener('pointermove', updateMousePosition);
+      window.addEventListener('blur', function() {
         mouse.x = null;
         mouse.y = null;
         mouseVelocity.x = 0;

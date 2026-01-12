@@ -160,6 +160,31 @@
   .theme-text-muted {
     color: var(--text-muted);
   }
+
+  .contact-social-card {
+    @apply relative overflow-hidden rounded-lg shadow-lg transition-all duration-300 text-center transform-gpu;
+  }
+
+  .contact-social-card:hover,
+  .contact-social-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.18);
+  }
+
+  .contact-social-card:focus-visible {
+    outline: none;
+    box-shadow: 0 14px 26px rgba(0, 0, 0, 0.18), 0 0 0 3px rgba(255, 255, 255, 0.55);
+  }
+
+  .contact-social-icon {
+    transition: transform 300ms ease;
+    transform-origin: center;
+  }
+
+  .contact-social-card:hover .contact-social-icon,
+  .contact-social-card:focus-visible .contact-social-icon {
+    transform: scale(1.35);
+  }
 }
 
 /* Custom animations */

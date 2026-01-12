@@ -27,12 +27,12 @@ const delay = index * 100;
   aria-label={`${viewProjectLabel}: ${project.title}`}
   onkeydown="if (event.key === ' ') { event.preventDefault(); this.click(); }"
 >
-  <div class="relative w-full md:w-5/12">
+  <div class="relative w-full bg-slate-100 md:w-5/12">
     <img
       src={project.coverImage}
       alt={`${project.title} cover`}
       loading="lazy"
-      class="h-56 w-full object-cover transition-transform duration-300 ease-out group-hover:scale-105 md:h-full"
+      class="h-56 w-full object-contain transition-transform duration-300 ease-out group-hover:scale-105 md:h-full"
       onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
     />
     <div class="absolute inset-0 hidden items-center justify-center bg-slate-200 text-slate-500">
