@@ -6,6 +6,21 @@ import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const year = new Date().getFullYear();
+const siteUrl = Astro.site?.toString() ?? 'https://vojtechdeconinck.me';
+const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === `/${lang}/` || Astro.url.pathname === `/${lang}`;
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Vojtech De Coninck',
+  url: siteUrl,
+  jobTitle: 'Electrical Engineer & Software Developer',
+  image: `${siteUrl}/images/profile-photo.jpg`,
+  sameAs: [
+    'https://www.linkedin.com/in/vojtech-de-coninck-110701296',
+    'https://github.com/VojtaDC',
+    'https://instagram.com/vojta.deconinck',
+  ],
+};
 ---
 <html lang={lang}>
   <head>
@@ -17,6 +32,9 @@ const year = new Date().getFullYear();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    {isHomePage && (
+      <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
+    )}
   </head>
   <body class="min-h-screen font-['Inter',sans-serif] antialiased theme-transition">
     <Nav />
