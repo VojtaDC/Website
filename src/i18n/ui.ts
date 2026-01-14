@@ -198,6 +198,13 @@ export const ui = {
     'projects.exchange.highlight.advanced': 'Advanced Engineering',
     'cv.title': 'Curriculum Vitae',
     'cv.subtitle': 'Professional Experience and Education',
+    'cv.download': 'Download CV (PDF)',
+    'cv.download.note': 'Official A4 PDF',
+    'cv.section.contact': 'Contact',
+    'cv.section.education': 'Education',
+    'cv.section.experience': 'Experience',
+    'cv.section.skills': 'Skills',
+    'cv.section.languages': 'Languages',
     
     // Timeline events
     'timeline.events.work1.title': 'Student Worker - Okay Supermarket',
@@ -423,6 +430,13 @@ export const ui = {
     // CV page
     'cv.title': 'Curriculum Vitae',
     'cv.subtitle': 'Professionele Ervaring en Onderwijs',
+    'cv.download': 'CV downloaden (PDF)',
+    'cv.download.note': 'Officiële A4-pdf',
+    'cv.section.contact': 'Contact',
+    'cv.section.education': 'Opleiding',
+    'cv.section.experience': 'Ervaring',
+    'cv.section.skills': 'Vaardigheden',
+    'cv.section.languages': 'Talen',
     
     // Timeline events
     'timeline.events.work1.title': 'Studentenwerk - Okay Supermarkt',
@@ -648,6 +662,13 @@ export const ui = {
     // CV page
     'cv.title': 'Curriculum Vitae',
     'cv.subtitle': 'Profesionální Zkušenosti a Vzdělání',
+    'cv.download': 'Stáhnout CV (PDF)',
+    'cv.download.note': 'Oficiální A4 PDF',
+    'cv.section.contact': 'Kontakt',
+    'cv.section.education': 'Vzdělání',
+    'cv.section.experience': 'Zkušenosti',
+    'cv.section.skills': 'Dovednosti',
+    'cv.section.languages': 'Jazyky',
     
     // Timeline events
     'timeline.events.work1.title': 'Studentská Práce - Okay Supermarket',
@@ -873,6 +894,13 @@ export const ui = {
     // CV page
     'cv.title': 'Curriculum Vitae',
     'cv.subtitle': 'Professionel Erfaring og Uddannelse',
+    'cv.download': 'Download CV (PDF)',
+    'cv.download.note': 'Officiel A4 PDF',
+    'cv.section.contact': 'Kontakt',
+    'cv.section.education': 'Uddannelse',
+    'cv.section.experience': 'Erfaring',
+    'cv.section.skills': 'Færdigheder',
+    'cv.section.languages': 'Sprog',
     
     // Timeline events
     'timeline.events.work1.title': 'Studenterarbejde - Okay Supermarked',

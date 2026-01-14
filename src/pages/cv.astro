@@ -1,282 +1,305 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getLangFromUrl, useTranslations, getLocalizedPath } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+const downloadHref = '/documents/vojtech-de-coninck-cv.pdf';
+const locationLines = t('contact.info.location.body').split('\n');
+
+const contactItems = [
+  {
+    label: t('contact.form.email'),
+    value: 'vojtadeconinck@gmail.com',
+    href: 'mailto:vojtadeconinck@gmail.com',
+  },
+  {
+    label: t('contact.info.phone.title'),
+    value: '+32 (0)456 01 30 17',
+    href: 'tel:+32456013017',
+  },
+  {
+    label: t('contact.info.location.title'),
+    lines: locationLines,
+  },
+  {
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/vojtech-de-coninck-110701296',
+    href: 'https://www.linkedin.com/in/vojtech-de-coninck-110701296',
+  },
+  {
+    label: 'GitHub',
+    value: 'github.com/VojtaDC',
+    href: 'https://github.com/VojtaDC',
+  },
+];
+
+const educationItems = [
+  {
+    period: 'Sept 2025 - 2028',
+    title: t('timeline.master.title'),
+    meta: 'Technical University of Denmark (DTU) • Vrije Universiteit Brussel (VUB)',
+    description: t('timeline.master.description'),
+    border: 'border-blue-500/70',
+  },
+  {
+    period: 'Sept 2022 - July 2025',
+    title: t('timeline.graduation.title'),
+    meta: 'Vrije Universiteit Brussel (VUB)',
+    description: t('timeline.graduation.description'),
+    border: 'border-emerald-500/70',
+  },
+];
+
+const experienceItems = [
+  {
+    period: 'End 2023 - Present',
+    title: t('timeline.business.title'),
+    meta: 'Belgium',
+    description: t('timeline.business.description'),
+    border: 'border-purple-500/70',
+  },
+  {
+    period: '2024 - 2025',
+    title: t('timeline.coach.title'),
+    meta: 'Black Devils Vorst',
+    description: t('timeline.coach.description'),
+    border: 'border-orange-500/70',
+  },
+  {
+    period: '2021',
+    title: t('timeline.tutoring.title'),
+    description: t('timeline.tutoring.description'),
+    border: 'border-sky-500/70',
+  },
+  {
+    period: '2020 - 2022',
+    title: t('timeline.retail.title'),
+    meta: 'Okay Compact',
+    description: t('timeline.retail.description'),
+    border: 'border-green-500/70',
+  },
+];
+
+const skillGroups = [
+  {
+    title: t('home.skills.coding.title'),
+    items: [
+      t('home.skills.coding.item.python'),
+      t('home.skills.coding.item.cpp'),
+      t('home.skills.coding.item.java'),
+      t('home.skills.coding.item.assembly'),
+      t('home.skills.coding.item.matlab'),
+    ],
+  },
+  {
+    title: t('home.skills.cad.title'),
+    items: [
+      t('home.skills.cad.item.altium'),
+      t('home.skills.cad.item.inventor'),
+      t('home.skills.cad.item.fusion'),
+    ],
+  },
+  {
+    title: t('home.skills.tutoring.title'),
+    items: [
+      t('home.skills.tutoring.item.math'),
+      t('home.skills.tutoring.item.physics'),
+      t('home.skills.tutoring.item.chemistry'),
+      t('home.skills.tutoring.item.python'),
+    ],
+  },
+];
+
+const languages = [
+  { name: 'Dutch', level: 'Native', value: 100 },
+  { name: 'English', note: 'IELTS C1', level: 'C1 - Advanced', value: 90 },
+  { name: 'French', level: 'B2 - Upper intermediate', value: 75 },
+  { name: 'Czech', level: 'B2 - Upper intermediate', value: 75 },
+  { name: 'Danish', note: 'Started lessons in September 2025', level: 'A1 - Elementary', value: 20 },
+  { name: 'German', level: 'A1 - Elementary', value: 20 },
+];
 ---
+
 <BaseLayout>
-  <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-    <!-- Hero Section -->
-    <section class="py-20 px-6" data-aos="fade-up">
-      <div class="container mx-auto text-center">
-        <h1 class="text-5xl md:text-6xl font-bold text-gray-800 mb-6">
-          {t('cv.title')}
-        </h1>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
-          {t('cv.subtitle')}
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button 
-            type="button"
-            class="js-cv-toggle inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-            aria-controls="cvWindow"
-            aria-expanded="false"
-          >
-            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-            </svg>
-            View Interactive CV
-          </button>
-          <a 
-            href="/cv/index.html" 
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-          >
-            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-            </svg>
-            Open in New Window
-          </a>
+  <div class="section-bg theme-transition">
+    <section class="relative overflow-hidden px-6 py-16 md:py-20" data-aos="fade-up">
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-32 left-1/4 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl"></div>
+        <div class="absolute -bottom-24 right-0 h-72 w-72 rounded-full bg-indigo-500/10 blur-3xl"></div>
+      </div>
+      <div class="container mx-auto relative">
+        <div class="max-w-4xl">
+          <div class="flex flex-wrap items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] theme-text-muted">
+            <span class="flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full bg-blue-500"></span>
+              {t('nav.portfolio')}
+            </span>
+            <span
+              class="rounded-full border px-3 py-1 text-[10px] font-semibold"
+              style="border-color: var(--blue-primary); color: var(--blue-primary);"
+            >
+              {t('home.subtitle')}
+            </span>
+          </div>
+          <h1 class="mt-6 text-4xl md:text-5xl font-bold theme-text">
+            {t('cv.title')}
+          </h1>
+          <p class="mt-4 text-lg md:text-xl theme-text-secondary leading-relaxed">
+            {t('cv.subtitle')}
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a
+              href={downloadHref}
+              download="Vojtech-De-Coninck-CV.pdf"
+              class="btn-download"
+            >
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V4"></path>
+              </svg>
+              {t('cv.download')}
+            </a>
+            <span class="text-sm theme-text-muted">{t('cv.download.note')}</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive CV Window -->
-    <div id="cvWindow" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-      <div class="flex items-center justify-center min-h-screen p-4">
-        <div class="bg-white rounded-lg shadow-2xl w-full h-full max-w-6xl max-h-[90vh] relative">
-          <!-- Window Header -->
-          <div class="bg-gray-100 px-6 py-4 rounded-t-lg border-b flex justify-between items-center">
-            <h3 class="text-lg font-semibold text-gray-800">Interactive CV - Vojtěch De Coninck</h3>
-            <button 
-              onclick="toggleCVWindow()"
-              class="text-gray-500 hover:text-gray-700 text-2xl font-bold"
-            >
-              &times;
-            </button>
+    <section class="px-6 pb-20">
+      <div class="container mx-auto grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-4 space-y-8">
+          <div class="theme-card rounded-2xl border p-6 shadow-lg" data-aos="fade-up">
+            <h2 class="text-xl font-bold theme-text mb-6">{t('cv.section.contact')}</h2>
+            <div class="space-y-4">
+              {contactItems.map((item) => (
+                <div class="flex items-start gap-3">
+                  <span class="mt-2 h-2.5 w-2.5 rounded-full bg-blue-500/70"></span>
+                  <div>
+                    <p class="text-xs font-semibold uppercase tracking-widest theme-text-muted">{item.label}</p>
+                    {item.lines ? (
+                      <div class="text-sm theme-text-secondary">
+                        {item.lines.map((line) => (
+                          <span class="block">{line}</span>
+                        ))}
+                      </div>
+                    ) : item.href ? (
+                      <a
+                        href={item.href}
+                        class="text-sm font-semibold text-blue-500 transition-colors duration-300 hover:text-blue-600"
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                        rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p class="text-sm theme-text-secondary">{item.value}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <!-- CV Content -->
-          <div class="h-full">
-            <iframe 
-              id="cvIframe"
-              src="/cv/index.html" 
-              class="w-full h-full rounded-b-lg"
-              frameborder="0"
-              style="height: calc(90vh - 80px);"
-            ></iframe>
+
+          <div class="theme-card rounded-2xl border p-6 shadow-lg" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="text-xl font-bold theme-text mb-6">{t('cv.section.skills')}</h2>
+            <div class="space-y-6">
+              {skillGroups.map((group) => (
+                <div>
+                  <p class="text-sm font-semibold theme-text mb-3">{group.title}</p>
+                  <div class="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span
+                        class="rounded-full px-3 py-1 text-xs font-semibold"
+                        style="background-color: var(--blue-light); color: var(--blue-primary); border: 1px solid var(--blue-primary);"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="theme-card rounded-2xl border p-6 shadow-lg" data-aos="fade-up" data-aos-delay="150">
+            <h2 class="text-xl font-bold theme-text mb-6">{t('cv.section.languages')}</h2>
+            <div class="space-y-4">
+              {languages.map((language) => (
+                <div class="rounded-xl border border-[color:var(--border-color)] p-4 theme-transition">
+                  <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                      <p class="font-semibold theme-text">{language.name}</p>
+                      {language.note && (
+                        <p class="mt-1 text-xs theme-text-muted">{language.note}</p>
+                      )}
+                    </div>
+                    <span class="text-xs font-semibold theme-text-muted">{language.level}</span>
+                  </div>
+                  <div class="mt-3 h-2 rounded-full" style="background-color: var(--bg-tertiary);">
+                    <div
+                      class="h-2 rounded-full"
+                      style={`width: ${language.value}%; background-color: var(--blue-primary);`}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- CV Preview -->
-    <section class="py-16 px-6">
-      <div class="container mx-auto max-w-4xl">
-        <div class="bg-white rounded-xl shadow-lg p-8 md:p-12">
-          <!-- Header -->
-          <div class="text-center mb-12" data-aos="fade-up">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">CV Preview</h2>
-            <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
-          </div>
-
-          <!-- Personal Info -->
-          <div class="mb-12" data-aos="fade-up" data-aos-delay="100">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Personal Information</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <p class="text-gray-600 mb-2"><strong>Name:</strong> [Your Name]</p>
-                <p class="text-gray-600 mb-2"><strong>Email:</strong> your.email@example.com</p>
-                <p class="text-gray-600 mb-2"><strong>Location:</strong> Copenhagen, Denmark / Brussels, Belgium</p>
-              </div>
-              <div>
-                <p class="text-gray-600 mb-2"><strong>Phone:</strong> +32 XXX XXX XXX</p>
-                <p class="text-gray-600 mb-2"><strong>LinkedIn:</strong> linkedin.com/in/vojtech-de-coninck-110701296</p>
-                <p class="text-gray-600 mb-2"><strong>GitHub:</strong> github.com/yourusername</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Education -->
-          <div class="mb-12" data-aos="fade-up" data-aos-delay="200">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Education</h3>
-            <div class="space-y-6">
-              <div class="border-l-4 border-blue-500 pl-6">
-                <h4 class="text-xl font-semibold text-gray-800">Master in Electrical Engineering</h4>
-                <p class="text-blue-600 font-medium">Technical University of Denmark (DTU)</p>
-                <p class="text-gray-600">September 2025 - Expected 2027</p>
-                <p class="text-gray-600 mt-2">Double Degree Exchange Program with VUB</p>
-              </div>
-              <div class="border-l-4 border-green-500 pl-6">
-                <h4 class="text-xl font-semibold text-gray-800">Bachelor in Civil Engineering</h4>
-                <p class="text-green-600 font-medium">Vrije Universiteit Brussel (VUB)</p>
-                <p class="text-gray-600">September 2022 - July 2025</p>
-                <p class="text-gray-600 mt-2">Graduated with honors</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Experience -->
-          <div class="mb-12" data-aos="fade-up" data-aos-delay="300">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Professional Experience</h3>
-            <div class="space-y-6">
-              <div class="border-l-4 border-purple-500 pl-6">
-                <h4 class="text-xl font-semibold text-gray-800">Founder & Professional Tutor</h4>
-                <p class="text-purple-600 font-medium">Own Tutoring Business</p>
-                <p class="text-gray-600">End 2023 - Present</p>
-                <ul class="text-gray-600 mt-2 list-disc list-inside">
-                  <li>Founded and operated professional tutoring business</li>
-                  <li>Provided high-quality educational services to students</li>
-                  <li>Managed business operations and customer relations</li>
-                </ul>
-              </div>
-              <div class="border-l-4 border-orange-500 pl-6">
-                <h4 class="text-xl font-semibold text-gray-800">Basketball Coach</h4>
-                <p class="text-orange-600 font-medium">Black Devils Vorst</p>
-                <p class="text-gray-600">2024 - 2025</p>
-                <ul class="text-gray-600 mt-2 list-disc list-inside">
-                  <li>Coached and mentored young basketball players</li>
-                  <li>Developed training programs and strategies</li>
-                  <li>Enhanced leadership and communication skills</li>
-                </ul>
-              </div>
-              <div class="border-l-4 border-blue-500 pl-6">
-                <h4 class="text-xl font-semibold text-gray-800">Private Tutor</h4>
-                <p class="text-blue-600 font-medium">Freelance</p>
-                <p class="text-gray-600">2021 - 2023</p>
-                <ul class="text-gray-600 mt-2 list-disc list-inside">
-                  <li>Provided one-on-one tutoring in mathematics and sciences</li>
-                  <li>Helped students improve academic performance</li>
-                  <li>Developed personalized learning strategies</li>
-                </ul>
-              </div>
-              <div class="border-l-4 border-green-500 pl-6">
-                <h4 class="text-xl font-semibold text-gray-800">Student Worker</h4>
-                <p class="text-green-600 font-medium">Okay Supermarket</p>
-                <p class="text-gray-600">2020 - 2022</p>
-                <ul class="text-gray-600 mt-2 list-disc list-inside">
-                  <li>Customer service and retail operations</li>
-                  <li>Inventory management and cash handling</li>
-                  <li>Team collaboration in fast-paced environment</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Skills -->
-          <div class="mb-12" data-aos="fade-up" data-aos-delay="400">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Skills & Competencies</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 class="text-lg font-semibold text-gray-800 mb-3">Technical Skills</h4>
-                <div class="flex flex-wrap gap-2">
-                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Civil Engineering</span>
-                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Electrical Engineering</span>
-                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Project Management</span>
-                  <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Problem Solving</span>
+        <div class="lg:col-span-8 space-y-8">
+          <div class="theme-card rounded-2xl border p-6 shadow-lg" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="text-xl font-bold theme-text mb-6">{t('cv.section.education')}</h2>
+            <div class="space-y-5">
+              {educationItems.map((item) => (
+                <div class={`rounded-xl border border-[color:var(--border-color)] border-l-4 ${item.border} p-5`}>
+                  <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <h3 class="text-lg font-semibold theme-text">{item.title}</h3>
+                      {item.meta && <p class="text-sm theme-text-muted mt-1">{item.meta}</p>}
+                    </div>
+                    <span
+                      class="rounded-full border px-3 py-1 text-xs font-semibold"
+                      style="border-color: var(--blue-primary); color: var(--blue-primary);"
+                    >
+                      {item.period}
+                    </span>
+                  </div>
+                  <p class="mt-4 text-sm leading-relaxed theme-text-secondary">
+                    {item.description}
+                  </p>
                 </div>
-              </div>
-              <div>
-                <h4 class="text-lg font-semibold text-gray-800 mb-3">Soft Skills</h4>
-                <div class="flex flex-wrap gap-2">
-                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Leadership</span>
-                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Communication</span>
-                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Team Work</span>
-                  <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Teaching</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="theme-card rounded-2xl border p-6 shadow-lg" data-aos="fade-up" data-aos-delay="250">
+            <h2 class="text-xl font-bold theme-text mb-6">{t('cv.section.experience')}</h2>
+            <div class="space-y-5">
+              {experienceItems.map((item) => (
+                <div class={`rounded-xl border border-[color:var(--border-color)] border-l-4 ${item.border} p-5`}>
+                  <div class="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <h3 class="text-lg font-semibold theme-text">{item.title}</h3>
+                      {item.meta && <p class="text-sm theme-text-muted mt-1">{item.meta}</p>}
+                    </div>
+                    <span
+                      class="rounded-full border px-3 py-1 text-xs font-semibold"
+                      style="border-color: var(--blue-primary); color: var(--blue-primary);"
+                    >
+                      {item.period}
+                    </span>
+                  </div>
+                  <p class="mt-4 text-sm leading-relaxed theme-text-secondary">
+                    {item.description}
+                  </p>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Languages -->
-          <div class="mb-12" data-aos="fade-up" data-aos-delay="500">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-blue-100 pb-2">Languages</h3>
-            <div class="grid md:grid-cols-3 gap-4">
-              <div class="text-center p-4 bg-gray-50 rounded-lg">
-                <h4 class="font-semibold text-gray-800">Dutch</h4>
-                <p class="text-gray-600">Native</p>
-              </div>
-              <div class="text-center p-4 bg-gray-50 rounded-lg">
-                <h4 class="font-semibold text-gray-800">English</h4>
-                <p class="text-gray-600">Fluent</p>
-              </div>
-              <div class="text-center p-4 bg-gray-50 rounded-lg">
-                <h4 class="font-semibold text-gray-800">French</h4>
-                <p class="text-gray-600">Intermediate</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="text-center" data-aos="fade-up" data-aos-delay="600">
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button 
-                type="button"
-                class="js-cv-toggle inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                aria-controls="cvWindow"
-                aria-expanded="false"
-              >
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                </svg>
-                View Interactive CV
-              </button>
-              <a 
-                href="/cv/index.html" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-              >
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                </svg>
-                Open in New Window
-              </a>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </section>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cvWindow = document.getElementById('cvWindow');
-      const toggleButtons = document.querySelectorAll('.js-cv-toggle');
-
-      if (!cvWindow || toggleButtons.length === 0) return;
-
-      const setExpanded = (expanded) => {
-        toggleButtons.forEach((button) => {
-          button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-        });
-      };
-
-      const toggleCVWindow = () => {
-        const isHidden = cvWindow.classList.contains('hidden');
-        cvWindow.classList.toggle('hidden', !isHidden);
-        document.body.style.overflow = isHidden ? 'hidden' : 'auto';
-        setExpanded(isHidden);
-      };
-
-      toggleButtons.forEach((button) => {
-        button.addEventListener('click', toggleCVWindow);
-      });
-
-      cvWindow.addEventListener('click', (e) => {
-        if (e.target === cvWindow) {
-          toggleCVWindow();
-        }
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !cvWindow.classList.contains('hidden')) {
-          toggleCVWindow();
-        }
-      });
-    });
-  </script>
 </BaseLayout>
