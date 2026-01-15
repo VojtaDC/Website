@@ -281,7 +281,12 @@ const t = useTranslations(lang);
       }
       
       resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
+      function handleResize() {
+        resizeCanvas();
+        syncParticles();
+      }
+
+      window.addEventListener('resize', handleResize);
       
       // Mouse tracking (use window to keep interaction when hovering text)
       function updateMousePosition(e) {
@@ -379,9 +384,28 @@ const t = useTranslations(lang);
       
       // Create particles
       const particles = [];
-      for (let i = 0; i < 200; i++) {
-        particles.push(new Particle());
+      const baseParticleCount = 200;
+      const baseArea = 1500 * 900;
+      const minParticles = 50;
+      const maxParticles = 260;
+
+      function getParticleTarget() {
+        const area = canvas.width * canvas.height;
+        const scaled = Math.round(baseParticleCount * (area / baseArea));
+        return Math.max(minParticles, Math.min(maxParticles, scaled));
       }
+
+      function syncParticles() {
+        const target = getParticleTarget();
+        while (particles.length < target) {
+          particles.push(new Particle());
+        }
+        while (particles.length > target) {
+          particles.pop();
+        }
+      }
+
+      syncParticles();
       
       
       // Get theme function
